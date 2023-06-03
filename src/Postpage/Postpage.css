@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "LeferiPoint-WhiteObliqueA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nanum Gothic", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.image-container {
+  margin-top: 5%;
+  display: flex;
+  height: 500px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.postbutton {
+  margin: 3%;
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  font-size: 50px;
+}
+
+.image {
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 1000px;
+  height: inherit;
+  align-items: center;
+  object-fit: cover;
+}
+
+.post-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+.post-title__item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 40px;
+  width: 1000px;
+  height: inherit;
+}
+
+.post-body {
+  margin: auto;
+  text-align: left;
+  width: 1000px;
+}
+
+.post-body h1 {
+  font-size: 35px !important;
+  line-height: 230% !important;
+  color: white !important;
+  font-weight: 800 !important;
+  width: inherit;
+}
+.post-body h2 {
+  font-size: 30px !important;
+  line-height: 230% !important;
+  color: white !important;
+  width: inherit;
+}
+.post-body h3 {
+  font-size: 25px;
+  line-height: 230%;
+  color: white !important;
+  font-weight: 700;
+  width: inherit;
+}
+.post-body blockquote {
+  font-size: 30px;
+  line-height: 230%;
+  color: white;
+  width: inherit;
+  font-weight: 800 !important;
+  background-color: gray;
+  border-radius: 8px !important;
+}
+.post-body p {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 230% !important;
+  color: white !important;
+  width: inherit;
+}
+.post-body code,
+pre {
+  font-size: 20px;
+  line-height: 230%;
+  color: white;
+  background-color: rgb(111, 111, 111) !important;
+  border: 3px solid white;
+  border-radius: 8px !important;
+  width: inherit;
+}
+
+.post-body em,
+strong,
+del {
+  font-size: inherit !important;
+  font-weight: 800 !important;
+  line-height: 230% !important;
+  color: white;
+  width: inherit;
+}

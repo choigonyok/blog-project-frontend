@@ -1,0 +1,53 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.tags-button:link {
+  color: white;
+}
+.tags-button:visited {
+  color: white;
+}
+.tags-button:hover {
+  border: 5px solid rgb(255, 51, 0, 0.9);
+  border-radius: 30px;
+  transition-duration: 300ms;
+}
+
+.tags {
+  font-size: 55px;
+  /* margin-top: 100px; */
+  text-align: center;
+}
+.fadein {
+  animation: fade-in 0.5s ease;
+}
+
+.tags-button {
+  font-size: 16px;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  background-clip: padding-box;
+  color: white;
+  border-radius: 30px;
+  transition: 300ms;
+}
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
+  flex-wrap: wrap;
+  padding-left: 30%;
+  padding-right: 30%;
+  gap: 10px;
+}
