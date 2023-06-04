@@ -1,7 +1,7 @@
 import { Editor } from "@toast-ui/react-editor";
 import Header from "../Header/Header";
 import ContentsViewer from "../UI/ContentsViewer";
-import abc from "../Assets/KakaoTalk_Photo_2022-09-27-12-53-39 003.png";
+import abc from "../Assets/74FAFC0D-E8A8-4E51-8000-AB7523F30200_1_105_c.jpeg";
 import "./Postpage.css";
 import EditorBox from "../UI/EditorBox";
 
@@ -18,14 +18,18 @@ const Postpage = () => {
         <img className="image" alt="my" src={abc} />
         <input type="button" className="postbutton" value=">" />
       </div>
-      <p>tag buttons</p>
       <div className="post-title">
+      <div className="post-tagsbox">
+        <button className="tags-button">go</button>
+        <button className="tags-button">gin</button>
+        <button className="tags-button">project</button>
+      </div>
         <p className="post-title__item">PROJECT #1-1 DEVELOPING TECH BLOG !</p>
+        <p className="written-date">2023/06/01</p>
       </div>
       <div className="post-body">
         <ContentsViewer
-          contents={`2023/05/27
-# Project #1 - 2
+          contents={`# Project #1 - 2
 
 ## **Contents**
         1. Git / Github

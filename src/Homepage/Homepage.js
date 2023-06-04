@@ -1,17 +1,14 @@
 import "./Homepage.css";
 import Header from "../Header/Header";
 import Button from "../UI/Button";
-import { useNavigate } from 'react-router-dom';
-
-
-
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleClick = () => {
     // 버튼 클릭 시 특정 URL로 이동
-    navigate('/post');
+    navigate("/post");
   };
 
   return (
@@ -19,9 +16,9 @@ const Homepage = () => {
       <Header /> {/* 6/2 Header 컴포넌트 재사용 위해서 분리 */}
       <div className="introduce">
         <h2>choi yunsuk</h2>
+        <h3>꾸준함이란 도구로 성장하기를 즐기는 웹 개발자 최윤석입니다</h3>
         <h4>2017.03~ &nbsp;&nbsp;&nbsp; KYUNGHEE UNIV. COMPUTER ENGINEERING</h4>
       </div>
-      
       <Button />
       {/* <p>Today : 1 &nbsp; / &nbsp; Total : 10</p> */}
       <div className="cardcontainer">
