@@ -1,0 +1,9 @@
+.pagebutton {
+        height: 150px;
+        flex-direction:row;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+      }

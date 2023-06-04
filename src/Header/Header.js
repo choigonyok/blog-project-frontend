@@ -18,8 +18,6 @@ const Header = () => {
     <div className="header">
       <button className="header-title" onClick={homePageHandler}>_techlog</button>
       <div className="header-empty" />
-      <button className="header-category">edit</button>
-      <button className="header-category">write</button>
       <a href="https://github.com/choigonyok" className="header-category">about</a>
     </div>
   );

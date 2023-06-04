@@ -14,22 +14,30 @@
   color: white;
 }
 .tags-button:hover {
-  border: 5px solid rgb(255, 51, 0, 0.9);
+  border: 5px solid rgb(255, 42, 0);
   border-radius: 30px;
-  transition-duration: 300ms;
+  transition-duration: 500ms;
+}
+
+.tags-button:active {
+  border: 5px solid rgb(255, 42, 0);
+  border-radius: 30px;
+  background-color: white;
+  color: black;
 }
 
 .tags {
   font-size: 55px;
-  margin-top: 100px;
   text-align: center;
+  font-weight: 800;
+  padding: 2%;
 }
 .fadein {
   animation: fade-in 0.5s ease;
 }
 
 .tags-button {
-  font-size: 16px;
+  font-size: 14px;
   padding-left: 4%;
   padding-right: 4%;
   padding-top: 1.5%;
@@ -39,15 +47,16 @@
   background-clip: padding-box;
   color: white;
   border-radius: 30px;
-  transition: 300ms;
+  transition: 500ms;
 }
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content:center;
   align-items: center;
-  height: 10vh;
+  height: auto;
   flex-wrap: wrap;
   padding-left: 30%;
   padding-right: 30%;
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 3%;
 }

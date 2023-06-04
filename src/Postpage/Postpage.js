@@ -13,23 +13,26 @@ const Postpage = () => {
       <br />
       <br />
       <br />
-      <div className="image-container">
-        <input type="button" className="postbutton" value="<" />
-        <img className="image" alt="my" src={abc} />
-        <input type="button" className="postbutton" value=">" />
-      </div>
-      <div className="post-title">
-      <div className="post-tagsbox">
-        <button className="tags-button">go</button>
-        <button className="tags-button">gin</button>
-        <button className="tags-button">project</button>
-      </div>
-        <p className="post-title__item">PROJECT #1-1 DEVELOPING TECH BLOG !</p>
-        <p className="written-date">2023/06/01</p>
-      </div>
-      <div className="post-body">
-        <ContentsViewer
-          contents={`# Project #1 - 2
+      <div className="postpage">
+        <div className="image-container">
+          <input type="button" className="postbutton" value="<" />
+          <img className="image" alt="my" src={abc} />
+          <input type="button" className="postbutton" value=">" />
+        </div>
+        <div className="post-title">
+          <div className="post-tagsbox">
+            <button className="post-tags__button">GO</button>
+            <button className="post-tags__button">GIN</button>
+            <button className="post-tags__button">PROJECT</button>
+          </div>
+          <p className="post-title__item">
+            프로젝트 2-1 : 블로그 개발하기 VER.2
+          </p>
+          <p className="written-date">2023/06/01</p>
+        </div>
+        <div className="post-body">
+          <ContentsViewer
+            contents={`# Project #1 - 2
 
 ## **Contents**
         1. Git / Github
@@ -260,12 +263,13 @@ HTML파일에서 사이드바 이름 변경해주었다.
 목차
 [1.11](#다음에-구현할-것)
 [2.22](#느낀점)`}
-        />
+          />
+        </div>
+        <p>index</p>
+        <p>이전/다음 포스트버튼</p>
+        <p>related posts : 태그가 같은 post 배치</p>
+        <p>load more : 6개만 표시하고 나머지는 load more 클릭하면 표시</p>
       </div>
-      <p>index</p>
-      <p>이전/다음 포스트버튼</p>
-      <p>related posts : 태그가 같은 post 배치</p>
-      <p>load more : 6개만 표시하고 나머지는 load more 클릭하면 표시</p>
     </div>
   );
 };

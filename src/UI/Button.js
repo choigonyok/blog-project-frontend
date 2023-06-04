@@ -2,13 +2,12 @@ import "./Button.css";
 import { useState } from "react";
 
 const Button = () => {
-  const [title, setTitle] = useState("all");
+  const [title, setTitle] = useState("ALL");
   const [animate, setAnimate] = useState(true);
 
   const ClickHandler = (value) => {
-    setTitle(value);
+    setTitle(`" `+value+` "`);
     setAnimate(!animate);
-    console.log(value);
   };
 
   const AnimationHandler = () => {
@@ -23,65 +22,60 @@ const Button = () => {
         {title}
       </h1>
       <div className="container">
+       
         <input
           type="button"
           className="tags-button"
-          value="all"
-          onClick={() => ClickHandler("all")}
+          value="PROJECT"
+          onClick={() => ClickHandler("PROJECT")}
         />
         <input
           type="button"
           className="tags-button"
-          value="project"
-          onClick={() => ClickHandler("project")}
+          value="STUDY"
+          onClick={() => ClickHandler("STUDY")}
+        />
+         <input
+          type="button"
+          className="tags-button"
+          value="RETRO"
+          onClick={() => ClickHandler("RETRO")}
         />
         <input
           type="button"
           className="tags-button"
-          value="review"
-          onClick={() => ClickHandler("review")}
+          value="CLOUD-CHAT-SERVICE"
+          onClick={() => ClickHandler("CLOUD-CHAT-SERVICE")}
         />
         <input
           type="button"
           className="tags-button"
-          value="study"
-          onClick={() => ClickHandler("study")}
+          value="DEV-BLOG"
+          onClick={() => ClickHandler("DEV-BLOG")}
         />
         <input
           type="button"
           className="tags-button"
-          value="go"
-          onClick={() => ClickHandler("go")}
+          value="REACT.JS"
+          onClick={() => ClickHandler("REACT.JS")}
         />
         <input
           type="button"
           className="tags-button"
-          value="dev.blog"
-          onClick={() => ClickHandler("dev.blog")}
+          value="ALL ABOUT THAT BASS"
+          onClick={() => ClickHandler("ALL ABOUT THAT BASS")}
         />
         <input
           type="button"
           className="tags-button"
-          value="react.js"
-          onClick={() => ClickHandler("react.js")}
+          value="DEV-BLOG VER.2"
+          onClick={() => ClickHandler("DEV-BLOG VER.2")}
         />
         <input
           type="button"
           className="tags-button"
-          value="all about that bass"
-          onClick={() => ClickHandler("all about that bass")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="spring"
-          onClick={() => ClickHandler("spring")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="docker"
-          onClick={() => ClickHandler("docker")}
+          value="DOCKER / K8S"
+          onClick={() => ClickHandler("DOCKER / K8S")}
         />
       </div>
     </div>
