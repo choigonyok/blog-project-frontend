@@ -108,6 +108,12 @@
   align-items: center;
   align-items: flex-end;
 }
+.postcard-date__box{
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 2%;
+}
+
 
 .postcard:hover {
   transform: scale(1.1);

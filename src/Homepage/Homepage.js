@@ -12,11 +12,14 @@ import img3 from "../Assets/img3.jpeg";
 import img4 from "../Assets/img4.jpeg";
 import img5 from "../Assets/img5.jpeg";
 import img6 from "../Assets/img6.jpeg";
+import img7 from "../Assets/img7.jpeg";
+import img8 from "../Assets/img8.jpeg";
+import img9 from "../Assets/img9.jpeg";
 
 const Homepage = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (pid) => {
     // 버튼 클릭 시 특정 URL로 이동
     navigate("/post");
   };
@@ -29,9 +32,22 @@ const Homepage = () => {
           <img className="home-image" alt="my" src={profileimage} />
         </div>
         <h4>꾸준함이란 도구로 성장하기를 즐기는 웹 개발자 최윤석입니다</h4>
+        <ul class="icons">
+        <li>
+          <a href="https://github.com/choigonyok" class="icon brands fa-instagram">
+            <span class="label">Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a href="www.instagram.com/choigonyok" class="icon brands fa-github">
+            <span class="label">Github</span>
+          </a>
+        </li>
+      </ul>
         <div className="introduce-text">
-        
-        <h5>2017.03~ &nbsp;&nbsp;&nbsp; KYUNGHEE UNIV. COMPUTER ENGINEERING</h5>
+          <h5>
+            2017.03~ &nbsp;&nbsp;&nbsp; KYUNGHEE UNIV. COMPUTER ENGINEERING
+          </h5>
         </div>
       </div>
       <Button />
@@ -45,12 +61,12 @@ const Homepage = () => {
             <div className="postcard-text">
               <p>리액트로 바위치기</p>
             </div>
-            
+
             <div className="postcard-tag">
               <p>STUDY / REACT.JS</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/07</p>
+              <p className="postcard-date__box">2023/06/07</p>
             </div>
           </h2>
         </div>
@@ -62,12 +78,12 @@ const Homepage = () => {
             <div className="postcard-text">
               <p>예대생 디자이너와의 협업 프로젝트 !</p>
             </div>
-            
+
             <div className="postcard-tag">
               <p>PROJECT / REACT.JS / GO / DOCKER</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/07</p>
+              <p className="postcard-date__box">2023/06/07</p>
             </div>
           </h2>
         </div>
@@ -79,12 +95,12 @@ const Homepage = () => {
             <div className="postcard-text">
               <p>프로젝트 2-1 : 블로그 개발하기 VER.2</p>
             </div>
-            
+
             <div className="postcard-tag">
               <p>PROJECT / REACT.JS / GO / GIN / DOCKER</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/07</p>
+              <p className="postcard-date__box">2023/06/07</p>
             </div>
           </h2>
         </div>
@@ -96,12 +112,12 @@ const Homepage = () => {
             <div className="postcard-text">
               <p>깃과 깃허브가 대체 뭘까?</p>
             </div>
-            
+
             <div className="postcard-tag">
               <p>STUDY</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/07</p>
+              <p className="postcard-date__box">2023/06/07</p>
             </div>
           </h2>
         </div>
@@ -114,12 +130,11 @@ const Homepage = () => {
               <p>프로젝트 1-2 : 개발환경 구성하기</p>
             </div>
 
-            
             <div className="postcard-tag">
               <p>PROJECT / GO / GIN</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/04</p>
+              <p className="postcard-date__box">2023/06/04</p>
             </div>
           </h2>
         </div>
@@ -131,12 +146,63 @@ const Homepage = () => {
             <div className="postcard-text">
               <p>프로젝트 1-1 블로그를 개발해보자!</p>
             </div>
-            
+
             <div className="postcard-tag">
               <p>PROJECT / GO / GIN</p>
             </div>
             <div className="postcard-date">
-              <p>2023/06/07</p>
+              <p className="postcard-date__box">2023/06/07</p>
+            </div>
+          </h2>
+        </div>
+        <div>
+          <h2 className="postcard" onClick={handleClick}>
+            <div>
+              <img className="postcard-image" alt="my" src={img7} />
+            </div>
+            <div className="postcard-text">
+              <p>L2 스위치에도 IP를 할당할 수 있다 !!</p>
+            </div>
+
+            <div className="postcard-tag">
+              <p>STUDY / NETWORK</p>
+            </div>
+            <div className="postcard-date">
+              <p className="postcard-date__box">2023/06/07</p>
+            </div>
+          </h2>
+        </div>
+        <div>
+          <h2 className="postcard" onClick={handleClick}>
+            <div>
+              <img className="postcard-image" alt="my" src={img8} />
+            </div>
+            <div className="postcard-text">
+              <p>MULTICASTING이란 무엇인가</p>
+            </div>
+
+            <div className="postcard-tag">
+              <p>STUDY / NETWORK</p>
+            </div>
+            <div className="postcard-date">
+              <p className="postcard-date__box">2023/06/04</p>
+            </div>
+          </h2>
+        </div>
+        <div>
+          <h2 className="postcard" onClick={handleClick}>
+            <div>
+              <img className="postcard-image" alt="my" src={img9} />
+            </div>
+            <div className="postcard-text">
+              <p>블로그에 TODAY 방문자 수 집계기능을 구현해보자</p>
+            </div>
+
+            <div className="postcard-tag">
+              <p>PROJECT / DEV-LOG VER.2</p>
+            </div>
+            <div className="postcard-date">
+              <p className="postcard-date__box">2023/06/07</p>
             </div>
           </h2>
         </div>

@@ -2,7 +2,7 @@ import "./Button.css";
 import { useState } from "react";
 
 const Button = () => {
-  const [title, setTitle] = useState("ALL");
+  const [title, setTitle] = useState(`" CHOIGONYOK "`);
   const [animate, setAnimate] = useState(true);
 
   const ClickHandler = (value) => {
@@ -62,8 +62,8 @@ const Button = () => {
         <input
           type="button"
           className="tags-button"
-          value="ALL ABOUT THAT BASS"
-          onClick={() => ClickHandler("ALL ABOUT THAT BASS")}
+          value="COLLABO W/ DEPT. OF ART"
+          onClick={() => ClickHandler("COLLABO W/ DEPT. OF ART")}
         />
         <input
           type="button"

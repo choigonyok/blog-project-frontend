@@ -29,8 +29,8 @@
   border-radius: 50px;
   display: flex;
   justify-content: center;
-  width: 850px;
-  height: inherit;
+  width: 900px;
+  height: 570px;
   align-items: center;
   object-fit: cover;
   
@@ -99,64 +99,89 @@
 }
 
 .post-body {
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
   margin: auto;
   text-align: left;
   width: 700px;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 
 .post-body h1 {
-  font-size: 32px !important;
-  line-height: 210% !important;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
+  font-size: 35px !important;
   color: white !important;
   font-weight: 800 !important;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 .post-body h2 {
-  font-size: 27px !important;
-  line-height: 210% !important;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  font-size: 28px !important;
+  line-height: 250% !important;
   color: white !important;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 .post-body h3 {
-  font-size: 23px;
-  line-height: 210%;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
+  font-size: 25px !important;
   color: white !important;
   font-weight: 700;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 .post-body blockquote {
-  font-size: 25px;
-  line-height: 210%;
-  color: white;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
+  font-size: 25px !important;
   width: inherit;
   font-weight: 800 !important;
-  background-color: gray;
+  background-color: rgba(255, 61, 22, 0.748);
   border-radius: 8px !important;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 .post-body p {
-  font-size: 18px !important;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
+  font-size: 15px !important;
   font-weight: 400 !important;
-  line-height: 210% !important;
-  color: white !important;
+  color: rgba(255, 255, 255, 0.88) !important;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
 .post-body code,
 pre {
-  font-size: 18px;
-  line-height: 210%;
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
+  font-size: 15px !important;
   color: white;
-  background-color: rgb(111, 111, 111) !important;
-  border: 3px solid white;
+  background-color: rgb(65, 65, 65) !important;
+
   border-radius: 8px !important;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
+  
 }
 
 .post-body em,
 strong,
 del {
+  letter-spacing : 0.4px !important;
+  word-spacing: -1.3px !important;
+  line-height: 215% !important;
   font-size: inherit !important;
   font-weight: 800 !important;
-  line-height: 210% !important;
   color: white;
   width: inherit;
+  font-family: 'LeferiPoint-BlackObliqueA' !important;
 }
