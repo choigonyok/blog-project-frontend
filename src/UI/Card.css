@@ -1,0 +1,77 @@
+.cardcontainer {
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: inherit;
+  flex-wrap: wrap;
+  row-gap: 100px;
+}
+
+.postcard {
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 370px;
+  height: 400px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0px 19px 20px 4px #000000;
+  transition: 800ms;
+  cursor: pointer;
+}
+.postcard-image {
+  display: flex;
+  height: 240px;
+  width: 370px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+}
+.postcard-tag {
+  font-size: 14px;
+  padding-left: 3%;
+  padding-right: 3%;
+  display: flex;
+  height: 40px;
+  width: auto;
+  justify-content: left;
+  align-items: flex-start;
+}
+
+.postcard-text {
+  font-size: 20px;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 4%;
+  padding-bottom: auto;
+  display: flex;
+  height: 80px;
+  width: auto;
+  justify-content: left;
+  align-items: flex-start;
+}
+
+.postcard-date {
+  font-size: 12px;
+  padding: 3%;
+  display: flex;
+  height: 40px;
+  width: auto;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  justify-content: right;
+  align-items: center;
+  align-items: flex-end;
+}
+.postcard-date__box {
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 2%;
+}
+
+.postcard:hover {
+  transform: scale(1.1);
+  transition: 300ms;
+}

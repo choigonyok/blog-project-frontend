@@ -106,6 +106,7 @@
   text-align: left;
   width: 700px;
   font-family: 'LeferiPoint-BlackObliqueA' !important;
+  margin-bottom: 100px; 
 }
 
 .post-body h1 {
@@ -184,4 +185,21 @@ del {
   color: white;
   width: inherit;
   font-family: 'LeferiPoint-BlackObliqueA' !important;
+}
+
+.related-post__container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.related-post__content{
+  border-top: 3px solid white;
+  width: 900px;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  font-size: 40px;
+  padding: 45px;
 }

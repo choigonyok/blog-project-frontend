@@ -1,11 +1,32 @@
 import "./Button.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const Button = () => {
+const Button = (props) => {
+  const [responseData, setResponseData] = useState(null);
   const [title, setTitle] = useState(`" CHOIGONYOK "`);
   const [animate, setAnimate] = useState(true);
+  const [PostData, setPostData] = useState("");
+
+  useEffect(() => {
+    // POST 요청 보내기
+    console.log(PostData);
+   
+    axios.post('http://localhost:8080/tag', PostData)
+        .then(response => {
+            // 응답 데이터 수신
+            console.log(response.data);
+            setResponseData(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+  }, [PostData]);
+
+  
 
   const ClickHandler = (value) => {
+    setPostData({ tagname: value });
     setTitle(`" `+value+` "`);
     setAnimate(!animate);
   };
@@ -78,6 +99,14 @@ const Button = () => {
           onClick={() => ClickHandler("DOCKER / K8S")}
         />
       </div>
+      {responseData && (
+    <div>
+      <h1>{responseData[0].Title}</h1>
+      <h1>{responseData[0].Body}</h1>
+      <h1>{responseData[0].Tag}</h1>
+      <h1>{responseData[0].Datetime}</h1>
+    </div>
+  )}
     </div>
   );
 };

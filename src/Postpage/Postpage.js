@@ -5,6 +5,7 @@ import abc from "../Assets/img9.jpeg";
 import "./Postpage.css";
 import EditorBox from "../UI/EditorBox";
 import Footer from "../UI/Footer";
+import Card from "../UI/Card";
 
 const Postpage = () => {
   return (
@@ -210,6 +211,10 @@ const Postpage = () => {
           />
         </div>
       </div>
+      <div className="related-post__container">
+        <p className="related-post__content">- RELATED POSTS -</p>
+      </div>
+      <Card/>
       <Footer />
     </div>
   );
