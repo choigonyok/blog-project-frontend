@@ -15,6 +15,8 @@ import img6 from "../Assets/img6.jpeg";
 import img7 from "../Assets/img7.jpeg";
 import img8 from "../Assets/img8.jpeg";
 import img9 from "../Assets/img9.jpeg";
+import github from "../Assets/Icons/github-icon.png";
+import instagram from "../Assets/Icons/instagram-icon.png";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -23,6 +25,8 @@ const Homepage = () => {
     // 버튼 클릭 시 특정 URL로 이동
     navigate("/post");
   };
+  const githubHandler = () => {};
+  const instagramHandler = () => {};
 
   return (
     <div>
@@ -31,20 +35,18 @@ const Homepage = () => {
         <div className="home-image__container">
           <img className="home-image" alt="my" src={profileimage} />
         </div>
-        <h4>꾸준함이란 도구로 성장하기를 즐기는 웹 개발자 최윤석입니다</h4>
-        <ul class="icons">
-        <li>
-          <a href="https://github.com/choigonyok" class="icon brands fa-instagram">
-            <span class="label">Instagram</span>
+        <div className="icon-container">
+          <a href="https://github.com/choigonyok">
+            <img className="icon-image" alt="my" src={github} />
           </a>
-        </li>
-        <li>
-          <a href="www.instagram.com/choigonyok" class="icon brands fa-github">
-            <span class="label">Github</span>
+          <a href="https://www.instagram.com/choigonyok">
+            <img className="icon-image" alt="my" src={instagram} />
           </a>
-        </li>
-      </ul>
-        <div className="introduce-text">
+        </div>
+        <div className="introduce-text__year">
+          <h4>꾸준함이란 도구로 성장하기를 즐기는 웹 개발자 최윤석입니다</h4>
+        </div>
+        <div className="introduce-text__year">
           <h5>
             2017.03~ &nbsp;&nbsp;&nbsp; KYUNGHEE UNIV. COMPUTER ENGINEERING
           </h5>
