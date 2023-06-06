@@ -5,14 +5,19 @@ import Footer from "../UI/Footer";
 import Pagebutton from "../UI/Pagebutton";
 import Card from "../UI/Card";
 
-
-
 import profileimage from "../Assets/IMG_0071 2.jpg";
 import github from "../Assets/Icons/github-icon.png";
 import instagram from "../Assets/Icons/instagram-icon.png";
+import { useState } from "react";
 
 const Homepage = () => {
- 
+
+  const [postData, setPostData] = useState([]);
+
+  const seeTaggedPostHandler = (taggedPostData) => {
+    <div>{taggedPostData.map((item, index) => console.log(item))}</div>;
+    setPostData(taggedPostData);
+  };
 
   return (
     <div>
@@ -38,10 +43,9 @@ const Homepage = () => {
           </h5>
         </div>
       </div>
-      <Button />
+      <Button onSeeTaggedPost={seeTaggedPostHandler} />
       {/* <p>Today : 1 &nbsp; / &nbsp; Total : 10</p> */}
-      <Card />
-      
+      {postData && <Card postdata={postData} />}
       <Pagebutton />
       <Footer />
     </div>

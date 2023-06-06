@@ -8,7 +8,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Homepage/>} />
-        <Route path="/post" element={<Postpage/>} />
+        <Route path="/post/:postid" element={<Postpage/>} />
       </Routes>
     </BrowserRouter>
   );

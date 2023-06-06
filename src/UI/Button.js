@@ -1,6 +1,7 @@
 import "./Button.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { json } from "react-router-dom";
 
 const Button = (props) => {
   const [responseData, setResponseData] = useState(null);
@@ -11,23 +12,22 @@ const Button = (props) => {
   useEffect(() => {
     // POST 요청 보내기
     console.log(PostData);
-   
-    axios.post('http://localhost:8080/tag', PostData)
-        .then(response => {
-            // 응답 데이터 수신
-            console.log(response.data);
-            setResponseData(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        });
-  }, [PostData]);
 
-  
+    axios
+      .post("http://localhost:8080/tag", PostData)
+      .then((response) => {
+        // 응답 데이터 수신
+        const jsonArray = Object.values(response.data);
+        props.onSeeTaggedPost(jsonArray);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [PostData]);
 
   const ClickHandler = (value) => {
     setPostData({ tagname: value });
-    setTitle(`" `+value+` "`);
+    setTitle(`" ` + value + ` "`);
     setAnimate(!animate);
   };
 
@@ -43,7 +43,12 @@ const Button = (props) => {
         {title}
       </h1>
       <div className="container">
-       
+        <input
+          type="button"
+          className="tags-button"
+          value="ALL"
+          onClick={() => ClickHandler("ALL")}
+        />
         <input
           type="button"
           className="tags-button"
@@ -56,7 +61,7 @@ const Button = (props) => {
           value="STUDY"
           onClick={() => ClickHandler("STUDY")}
         />
-         <input
+        <input
           type="button"
           className="tags-button"
           value="RETRO"
@@ -99,14 +104,6 @@ const Button = (props) => {
           onClick={() => ClickHandler("DOCKER / K8S")}
         />
       </div>
-      {responseData && (
-    <div>
-      <h1>{responseData[0].Title}</h1>
-      <h1>{responseData[0].Body}</h1>
-      <h1>{responseData[0].Tag}</h1>
-      <h1>{responseData[0].Datetime}</h1>
-    </div>
-  )}
     </div>
   );
 };
