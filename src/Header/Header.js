@@ -16,9 +16,10 @@ const Header = () => {
 
   return (
     <div className="header">
-      <button className="header-title" onClick={homePageHandler}>_techlog</button>
+      <button className="header-title" onClick={homePageHandler}>_TECHLOG</button>
       <div className="header-empty" />
       <a href="https://github.com/choigonyok" className="header-category">about</a>
+      <a href="#" className="header-category">admin</a>
     </div>
   );
 };

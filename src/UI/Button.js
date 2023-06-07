@@ -1,18 +1,15 @@
 import "./Button.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { json } from "react-router-dom";
 
 const Button = (props) => {
   const [responseData, setResponseData] = useState(null);
   const [title, setTitle] = useState(`" CHOIGONYOK "`);
   const [animate, setAnimate] = useState(true);
-  const [PostData, setPostData] = useState("");
+  const [PostData, setPostData] = useState({tagname: "ALL"});
 
   useEffect(() => {
     // POST 요청 보내기
-    console.log(PostData);
-
     axios
       .post("http://localhost:8080/tag", PostData)
       .then((response) => {

@@ -1,32 +1,51 @@
-import { Editor } from "@toast-ui/react-editor";
 import Header from "../Header/Header";
-import ContentsViewer from "../UI/ContentsViewer";
-import abc from "../Assets/img9.jpeg";
 import "./Postpage.css";
-import EditorBox from "../UI/EditorBox";
 import Footer from "../UI/Footer";
 import Card from "../UI/Card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import MDEditor from "@uiw/react-md-editor";
 
 const Postpage = () => {
-  let {postid} = useParams();
-  
+  let { postid } = useParams();
+
+  const [md, setMD] = useState("");
   const [postData, setPostData] = useState([]);
+  const [relatedPostData, setRelatedPostData] = useState([]);
+
   useEffect(() => {
-    // POST 요청 보내기
+    // GET 요청 보내기
     axios
-      .get("http://localhost:8080/post/"+JSON.stringify(postid))
+      .get("http://localhost:8080/post/" + JSON.stringify(postid))
       .then((response) => {
         // 응답 데이터 수신
-        console.log(response.data[0]);
         setPostData(response.data[0]);
       })
       .catch((error) => {
         console.error(error);
       });
-  },[]);
+  }, [postid]);
+
+  useEffect(() => {
+    // POST 요청 보내기
+
+    axios
+      .post("http://localhost:8080/tag", postData)
+      .then((response) => {
+        // 응답 데이터 수신
+        const jsonArray = Object.values(response.data);
+
+        console.log(jsonArray.filter((post) => String(post.Id) !== postid));
+        setRelatedPostData(
+          jsonArray.filter((post) => String(post.Id) !== postid)
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [postData]);
+
   return (
     <div>
       <Header />
@@ -44,22 +63,22 @@ const Postpage = () => {
           <div className="post-tagsbox">
             <button className="post-tags__button">{postData.Tag}</button>
           </div>
-          <p className="post-title__item">
-            {postData.Title}
-          </p>
+          <p className="post-title__item">{postData.Title}</p>
           <p className="written-date">{postData.Datetime}</p>
         </div>
-        <div className="post-body">
-          <ContentsViewer          
-            contents={postData.Body}
-          />
+        <div>
+          <MDEditor.Markdown className="post-body" source={postData.Body} />
         </div>
-        
       </div>
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>
-      {/* <Card/> related post의 tag 문제*/}
+      {/* <div>
+        <div>
+          <MDEditor height={865} value={md} onChange={setMD} />
+        </div>
+      </div> */}
+      {relatedPostData && <Card postdata={relatedPostData} />}
       <Footer />
     </div>
   );
