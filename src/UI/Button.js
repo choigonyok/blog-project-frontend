@@ -8,6 +8,7 @@ const Button = (props) => {
   const [animate, setAnimate] = useState(true);
   const [PostData, setPostData] = useState({ tagname: "ALL" });
   const [tagsdata, setTagsData] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     // POST 요청 보내기
@@ -37,6 +38,13 @@ const Button = (props) => {
         console.error(error);
       });
   }, []);
+  
+
+  const ButtonisClicked = (value) => {
+    if (PostData.Tagname === value) {
+      return true;
+    }
+  }
 
   const ClickHandler = (value) => {
     setPostData({ tagname: value });
@@ -58,14 +66,14 @@ const Button = (props) => {
       <div className="container">
         <input
           type="button"
-          className="tags-button"
+          className={"ALL"===PostData.tagname ? "tags-button__clicked": "tags-button"}
           value="ALL"
           onClick={() => ClickHandler("ALL")}
         />
         {tagsdata.map((item, index) => (
           <input
             type="button"
-            className="tags-button"
+            className={item.Tagname===PostData.tagname ? "tags-button__clicked": "tags-button"}
             value={item.Tagname}
             onClick={() => ClickHandler(item.Tagname)}
           />
