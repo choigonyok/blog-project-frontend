@@ -55,9 +55,7 @@ const Postpage = () => {
       <br />
       <div>
         <div className="image-container">
-          <input type="button" className="postbutton" value="<" />
           <img className="image" alt="my" src={postData.ImagePath} />
-          <input type="button" className="postbutton" value=">" />
         </div>
         <div className="post-title">
           <div className="post-tagsbox">
@@ -73,7 +71,15 @@ const Postpage = () => {
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>
-      {/* <div>
+      {/* <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div>
         <div>
           <MDEditor height={865} value={md} onChange={setMD} />
         </div>
