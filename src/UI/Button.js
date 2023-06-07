@@ -6,7 +6,8 @@ const Button = (props) => {
   const [responseData, setResponseData] = useState(null);
   const [title, setTitle] = useState(`" CHOIGONYOK "`);
   const [animate, setAnimate] = useState(true);
-  const [PostData, setPostData] = useState({tagname: "ALL"});
+  const [PostData, setPostData] = useState({ tagname: "ALL" });
+  const [tagsdata, setTagsData] = useState([]);
 
   useEffect(() => {
     // POST 요청 보내기
@@ -21,6 +22,21 @@ const Button = (props) => {
         console.error(error);
       });
   }, [PostData]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/tag")
+      .then((response) => {
+        // 응답 데이터 수신
+        console.log(response.data);
+        setTagsData(response.data);
+
+        // props.onSeeTaggedPost(jsonArray);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   const ClickHandler = (value) => {
     setPostData({ tagname: value });
@@ -46,60 +62,14 @@ const Button = (props) => {
           value="ALL"
           onClick={() => ClickHandler("ALL")}
         />
-        <input
-          type="button"
-          className="tags-button"
-          value="PROJECT"
-          onClick={() => ClickHandler("PROJECT")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="STUDY"
-          onClick={() => ClickHandler("STUDY")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="RETRO"
-          onClick={() => ClickHandler("RETRO")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="CLOUD-CHAT-SERVICE"
-          onClick={() => ClickHandler("CLOUD-CHAT-SERVICE")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="DEV-BLOG"
-          onClick={() => ClickHandler("DEV-BLOG")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="REACT.JS"
-          onClick={() => ClickHandler("REACT.JS")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="COLLABO W/ DEPT. OF ART"
-          onClick={() => ClickHandler("COLLABO W/ DEPT. OF ART")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="DEV-BLOG VER.2"
-          onClick={() => ClickHandler("DEV-BLOG VER.2")}
-        />
-        <input
-          type="button"
-          className="tags-button"
-          value="DOCKER / K8S"
-          onClick={() => ClickHandler("DOCKER / K8S")}
-        />
+        {tagsdata.map((item, index) => (
+          <input
+            type="button"
+            className="tags-button"
+            value={item.Tagname}
+            onClick={() => ClickHandler(item.Tagname)}
+          />
+        ))}
       </div>
     </div>
   );

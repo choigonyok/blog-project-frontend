@@ -206,3 +206,77 @@ onClick={cardClickHandler(value)}
 이게 아니라!
 onClick={()=>{cardClickHandler(value)}}
 이렇게 화살표함수를 사용해야한다.
+
+------------------------------------------------------------------------------------
+## (6/7)
+포스트 글을 읽고 맨 밑에 보고있는 글과 같은 태그를 가진 글들을 모아서 RELATED POST로 보여주는 기능을 구현하려고 했는데 글 전체를 다 불러오는 건 가능한, 현재 보고있는 글만빼는 건 잘 안됐음 리액트의 FILTER를 이용! (6/7 이미지 -1)
+
+INCLUEDS 붙여보기 -> 안됨 (6/7 이미지 -2)
+CONSOLE.LOG(POSTID); CONSOLE.LOG(JSONARRAY[0].ID); 로 콘솔 확인해보기 (6/7 이미지 -3) -> 둘다 10이 잘 나오는데 왜 필터링이 안되지??? 하다가 콘솔상에서 10의 색이 다른 걸 발견...! (6/7 이미지 -4)
+그 위에 콘솔에 POST 응답받은 본문을 살펴보니 (6/7 이미지 -5) ID만 보라색! 그 때 깨달았다. ID는 INT 형식으로 전달받았다는 거 (6/7 이미지 -2) -> GO로 작성된 서버 코드의 구조체 서버에서 선언은 INT타입으로 해도 JSON으로 마샬링(인코딩)해서 전달하면 다 키-값 형태의 STRING으로 변환되는 것인 줄 알았음. 타입을 그대로 갖고오는 줄 몰랐음!!! 그래서 알고 난 이후에 (6/7 이미지 -7)처럼 ID 키의 값을 STRING으로 변환해주었더니 (6/7 이미지 -8) 같은 흰색으로 콘솔에 출력되는 걸 확인할 수 있었다. 이후에 (6/7 이미지 -9) 필터링을 해서 USESTATE를 초기화해주고, 리렌더링 되면서 CARD 컴포넌트에는 USESTATE로 초기화된 필터링 POST들의 DATA가 전달된다! 그럼 원하는 기능이 잘 구현되는 걸 볼 수 있다. (6/7 영상 -1)
+
+처음 루트로 라우팅되면 홈페이지에서 전체 POST가 나오도록 구현했다. 원래는 렌더링하면 아무 POST도 나오지 않고 태그 버튼을 눌러야만 해당 태그에 맞는 글들이 나왔었는데, 그 이유는 (6/7 이미지 -10) 버튼 클릭 핸들러에만 JSON 형식으로 태그 데이터와 함께 POST요청을 보내도록 구현해뒀기 때문이다. (6/7 이미지 -11) 처음에 실행되는 POST요청은 USESTATE의 디폴트 값으로 요청이 되고, 이후에는 (USESTATE 값 변경으로 인한)리렌더링 여부와 관계없이 []에 들어있는 POSTDATA 값에 변화가 있을 때만 USEEFFECT가 재실행 된다->POST 요청을 보낸다. SETPOSTDATA() 가 클릭 핸들러에서만 동작했기 때문에 태그 버튼을 클릭하는 이벤트가 발생해야만 POST요청이 서버에 전송되었던 것이고, 내가 원하는 기능은 처음 접속했을 때 아무것도 누르지 않아도 전체 POST들을 볼 수 있게 하는 것이다.
+
+USEEFFECT는 처음 컴포넌트 실행시에는 기본적으로 자동 실행되기 때문에, POSTDATA에 DEFAULT값으로 무엇이 들어있는지가 중요하다. 원하는 기능을 구현하려면 DEFAULT 값으로 모든 태그가 POSTDATA에 들어있어야한다. 근데 DEFAULT값은 USESTATE를 선언할 때 정적으로 입력해주어야하는데, 태그는 블로그의 글을 작성/삭제하는 것에 따라서 태그가 늘어날수도/줄어들수도 있잖아!? 그렇게 동적으로 바뀐 태그가 있다면 몇몇 태그는 DEFAULT 값에서 누락되게 되고 -> 결국 첫 화면에 모든 POST를 전부 보여주지 못하고 몇개의 POST는 누락될 수 있다. (6/7 이미지 -13) 그래서 POSTDATA의 DEFAULT 값으로 키 => TAGNAME, 값 => "ALL" 이라는 JSON 형식의 데이터를 할당했다. 이제 이 데이터는 POST요청으로 본문에 담겨 서버로 전송되고 서버에서 이를 잘 처리하는 로직을 구현하면 될 것이다.
+
+GO 서버에서 TAGDATA 타입의 DATA를 선언해주었다 TAGDATA는
+
+TYPE TAGDATA STRUCT {
+TAGS STRING `JSON:"TAGNAME"`
+    }
+구조체이고 JSON형식의 TAGNAME키를 보면 TAGS가 값을 받아오도록 미리 선언해주었다.
+
+(6/7 이미지 -14 안씀) (6/7 이미지 -15)
+
+SHOULDBINDJSON으로 JSON 형태의 데이터를 변수 DATA에 저장한다. 그리고 DATA에 저장된 키(TAGNAME)의 값이 "ALL"이면 값을 "ALL"에서 빈 문자열 ""로 바꿔준다. GO는 STRING에서 ""을 0이 아니라 NIL(=NULL)로 취급한다
+
+이 뒤에는
+
+DB.QUERY("SELECT ID,TAG,TITLE,BODY,DATETIME,IMGPATH FROM POST WHERE TAG LIKE `%"+DATA.TAGS+"%`")
+쿼리문을 통해 POST들의 데이터를 읽어온다. DATA.TAGS는 NIL 상태이기 때문에 **WHERE TAG LIKE %%**는 사실상 없는 것과 마찬가지인 상태가 된다. 물론 키값이 "ALL"이 아니라 다른 특정 태그가 들어오면, 이 쿼리를 통해 해당 태그가 들어간 POST들을 찾게된다.
+
+이렇게 찾아온 데이터를 JSON형식으로 변환하고,
+
+RESPONSE, ERR := JSON.MARSHAL(POSTDATA)
+응답이 JSON 형식으로 간다고 헤더로 알려주고, 본문에 RESPONSE를 담아 응답하면
+
+ C.WRITER.HEADER().SET("CONTENT-TYPE", "APPLICATION/JSON")
+ C.WRITER.WRITE(RESPONSE)
+(6/7 영상 2) 영상처럼 홈페이지 루트로 라우팅했을 때 전체 POST를 다 볼 수 있다. ALL 태그를 누른 것과 안누른 것을 구분하기 위해서 (6/7 이미지 -16) 홈페이지로 라우팅했을 땐 아무 태그가 안눌린 상태이기 때문에 태그버튼 위의 제목을 CHOIGONYOK으로 지정해두었고 (6/7 이미지 -17) 이후에 ALL 버튼을 누르면 제목이 ALL로 되도록 구현했다. 표시되는 POST는 ALL 태그를 누르나 안누르나 전체 POST로 동일하지만, 기본 홈페이지로 접속했을 땐 제목으로 ALL보단 CHOIGONYOK이 렌더링되는 게 더 적절한 것 같아서 이렇게 구현하게 되었다.
+
+-----리액트 RELATED POST로 현재 보고있는 글은 빼고 보여주기------ CONSOLE.LOG(POSTID); CONSOLE.LOG(STRING(JSONARRAY[0].ID)); CONSOLE.LOG(JSONARRAY.FILTER((POST) => STRING(POST.ID) !== POSTID)); CONSOLE.LOG(JSONARRAY.FILTER(JSONARRAY => JSONARRAY.ID !== POSTID)); SETRELATEDPOSTDATA(JSONARRAY);
+
+------------------------------------------------------------------------------------
+## (6/8)
+깃 커밋하다가 코드충돌이 나서 작업 몇시간 한 걸 그대로 다 날릴뻔했다.
+다행히 VScode의 타임라인 기능과 기존 로컬에 있던 코드를 미리 복사해서 백업해둔 덕분에
+원래 있던 작업영역은 아예 삭제하고 git에서 clone을 새롭게 만들어서 git 레포와 remote 연동하고 git pull 하고 백업코드 복사해서 다시 푸시해서 다행히 살렸음
+날아간 거 알았을 때 진짜 식은땀이 났음
+긴장 잘 안하는데 오랜만에 완전 식겁함
+
+태그를 유동적으로 쓸 수 있게 동적화 작업을 함
+글을 작성했는데, 글에 새로운 태그가 있으면 자동으로 태그 버튼이 생기고,
+한 post만 갖고있던 태그에서 post가 삭제되면 더이상 그 태그를 가지고있는 post가 없는거니까
+자동으로 그 태그도 태그 버튼에서 사라지도록 구현함
+그러다보니 DB에서 모든 게시글의 태그를 매번 읽어와서 버튼을 생성해야하는데,
+아직 마무리를 다 못해서
+같은 태그의 버튼이 중복해서 여러개 생긴 상황임
+중복되는 태그만 하나로 묶어주면 태그버튼 동적화 작업은 끝!
+나중에 admin 페이지에서도 따로 태그버튼을 관리할 필요는 없어졌다~
+
+GO에서 slice 중복 제거하는 법
+->map을 이용하면 간편!!
+
+```go
+ret := []TagButtonData{}
+		m := make(map[TagButtonData]int)
+		for i, v := range posttagdata {
+			if _, ok := m[v]; !ok{
+				m[v] = i
+				ret = append(ret, v)
+			}
+		}
+```
+
+태그버튼 중복 제거도 구현 완료!
+
