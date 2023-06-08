@@ -103,7 +103,7 @@
 
 .post-body {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   margin: auto;
   text-align: left;
@@ -115,7 +115,7 @@
 
 .post-body h1 {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: 35px !important;
   color: white !important;
@@ -138,7 +138,7 @@
 
 .post-body h2 {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   font-size: 28px !important;
   line-height: 250% !important;
   color: white !important;
@@ -147,7 +147,7 @@
 }
 .post-body h3 {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: 25px !important;
   color: white !important;
@@ -157,7 +157,7 @@
 }
 .post-body blockquote {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: 25px !important;
   width: inherit;
@@ -168,9 +168,9 @@
 }
 .post-body p {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   font-weight: 400 !important;
   color: rgba(255, 255, 255, 0.88) !important;
   width: inherit;
@@ -179,7 +179,7 @@
 .post-body code,
 pre {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: 15px !important;
   color: white;
@@ -195,7 +195,7 @@ pre {
 strong,
 del {
   letter-spacing : 0.4px !important;
-  word-spacing: -1.3px !important;
+  word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: inherit !important;
   font-weight: 800 !important;
