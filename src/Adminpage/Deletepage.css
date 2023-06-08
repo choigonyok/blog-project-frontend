@@ -1,0 +1,98 @@
+.delete-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10%;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-main {
+  text-align: center;
+  font-size: 60px;
+}
+.delete-list {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: auto;
+  width: 1300px;
+  margin-top: 10%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  border-radius: 50px;
+        background-color: rgb(37, 37, 37);
+}
+.delete-inlist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  height: auto;
+}
+.delete-button {
+  display: flex;
+  width: 80px;
+  border: 2px solid white;
+  border-radius: 20px;
+  height: inherit;
+  background-color: rgba(255, 255, 255, 0.938);
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+.delete-button__container {
+        display: flex;
+        flex-direction: column;
+        width: 80px;
+        border-radius: 20px;
+        gap: 3rem;
+        justify-content: center;
+        align-items: center;
+      }
+.delete-post {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 1000px;
+  height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 2%;
+  align-items: start;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid white;
+  gap: 5px;
+}
+.delete-title {
+  display: flex;
+  font-size: 24px;
+  height: auto;
+  padding: 0.5rem;
+  text-align: center;
+}
+.delete-date {
+  display: flex;
+  border: 3px solid white;
+  border-radius: 20px;
+  flex-wrap: wrap;
+  display: flex;
+  font-size: 14px;
+  text-align: left;
+  padding: 0.5rem;
+}
+.delete-tag {
+  display: flex;
+
+  border-radius: 20px;
+  flex-wrap: wrap;
+  display: flex;
+  font-size: 16px;
+  text-align: left;
+  padding: 0.5rem;
+}

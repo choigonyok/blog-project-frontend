@@ -1,14 +1,13 @@
 import Header from "../Header/Header";
 import MDEditor from "@uiw/react-md-editor";
-import "./Adminpage.css";
+import "./Writepage.css";
 import Footer from "../UI/Footer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { act } from "react-dom/test-utils";
 import { useRef } from "react";
 
-const Adminpage = () => {
+const Writepage = () => {
   const [md, setMD] = useState("");
   const [titleText, setTitleText] = useState("");
   const [tagText, setTagText] = useState("");
@@ -87,7 +86,7 @@ const Adminpage = () => {
     <div>
       <Header />
       <div className="admin-container">
-        <div className="admin-main">ADMIN PAGE</div>
+        <div className="admin-main">WRITE PAGE</div>
         <div className="admin-titletagdate">
           <textarea
             placeholder="TAGS : PROJECT / BLOG"
@@ -149,4 +148,4 @@ const Adminpage = () => {
   );
 };
 
-export default Adminpage;
+export default Writepage;
