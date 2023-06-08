@@ -2,6 +2,7 @@ import "./App.css";
 import Homepage from "./Homepage/Homepage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Postpage from "./Postpage/Postpage";
+import Adminpage from "./Adminpage/Adminpage";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Homepage/>} />
         <Route path="/post/:postid" element={<Postpage/>} />
+        <Route path="/admin" element={<Adminpage/>} />
       </Routes>
     </BrowserRouter>
   );

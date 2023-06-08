@@ -10,7 +10,6 @@ import MDEditor from "@uiw/react-md-editor";
 const Postpage = () => {
   let { postid } = useParams();
 
-  const [md, setMD] = useState("");
   const [postData, setPostData] = useState([]);
   const [relatedPostData, setRelatedPostData] = useState([]);
 
@@ -71,19 +70,7 @@ const Postpage = () => {
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>
-      {/* <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <div>
-        <div>
-          <MDEditor height={865} value={md} onChange={setMD} />
-        </div>
-      </div> */}
+     
       {relatedPostData && <Card postdata={relatedPostData} />}
       <Footer />
     </div>

@@ -1,0 +1,42 @@
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10%;
+  margin-top: 5%;
+  justify-content: center;
+}
+.admin-editor {
+  margin-top: 2rem;
+  width: 100%;
+}
+.admin-main {
+  text-align: center;
+  font-size: 60px;
+}
+.admin-titletagdate {
+  margin: 1rem;
+  width: auto;
+  height: auto;
+  text-align: center;
+}
+.sample-container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  align-items: center;
+}
+
+textarea {
+  width: 600px;
+  height: 2rem;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  background-clip: padding-box;
+  color: white;
+  border-radius: 30px;
+  transition: 300ms;
+  resize: none;
+  overflow-y:hidden;
+}
