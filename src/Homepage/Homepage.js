@@ -15,7 +15,6 @@ const Homepage = () => {
   const [postData, setPostData] = useState([]);
 
   const seeTaggedPostHandler = (taggedPostData) => {
-    <div>{taggedPostData.map((item, index) => console.log(item))}</div>;
     setPostData(taggedPostData);
   };
 

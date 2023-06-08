@@ -443,4 +443,144 @@ open한 파일 create한 파일에 io.copy로 복사
     formData.append("file", img); 이거 몰라서 오류
 4. e.target.files[0] 이거 몰라서 오류
 5. post요청 두개 비동기 실행되서 오류
+6. image가 하나씩만 읽힘
 
+-> 여러개를 동시에 선택하면 e.target.value 때문에 계속 최신 상태로 초기화가 되고, 결국 맨 마지막 파일만 읽어들임
+const imgHandler = (e) => {
+    setIMG(e.target.files[0]);
+  };
+
+  에서
+
+  const imgHandler = (e) => {
+    setIMG(e.target.files);
+  };
+
+  로 변경
+
+  그럼 서버에서도 여러 파일을 읽을 수 있게 구현해야함
+
+
+ c.SaveUploadedFile()? 
+ c.String() ?->응답 전송?
+
+
+리액트에서 보낸 여러개 파일을 go로 받는법
+
+ 서버사이드
+
+ d, err := c.MultipartForm()
+			if err != nil {
+				fmt.Println("111111111111111111111111111111111111")
+			}
+			fff := d.File["file"]
+			for _, v := range fff {
+				fmt.Println(v.Filename)
+				c.SaveUploadedFile(v, "/Users/yunsuk/blog-ver2-server/src/IMAGES/"+v.Filename)
+			}
+			c.Writer.WriteHeader(http.StatusOK)
+
+
+클라이언트 사이드
+
+ useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;  //컴포넌트 실행시에 useEffect는 실행되지 않고, []안의 값이 바뀔때만 실행되도록 함
+    } else {
+      const formData = new FormData(); //formdata로 만들기
+      for (let i = 0; i < img.length; i++) { 
+        ->img useState에 들어있는 여러개의 파일을 하나씩 읽어서 formdata에 넣는 거
+        formData.append("file", img[i]);  
+        -> 여기서 "file" 이 이름이 서버사이드에서 파싱할 수 있는 key가 됨!!!!!!
+      }
+      axios
+        .post("http://localhost:8080/postdata/img", formData, {
+          "Content-type": "multipart/form-data",
+        })
+        .then((response) => {
+          // 응답 데이터 수신
+          console.log("POST2 Success");
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [unlock]);
+
+
+  업로드된 파일 저장할 때
+
+  loc, err := os.Create("/Users/yunsuk/blog-ver2-server/src/IMAGES/"+f.Filename)
+	if err != nil {
+		fmt.Println("FOLDER OPEN ERROR")
+	}
+	defer loc.Close()
+  _, err = io.Copy(loc, file)
+			if err != nil {
+				fmt.Println("COPY ERROR")
+	}
+
+  -> 이거 대신에
+
+  c.SaveUploadedFile(v, "/Users/yunsuk/blog-ver2-server/src/IMAGES/"+v.Filename)
+
+  이거 쓰면됨. 이건 파일이 multipartform일 때만 가능, 즉 업로드된 파일에 쓸 수 있는 함수
+
+  * db에 저장할 imgpath는 썸네일이미지 하나만 있으면 됨
+  -> 본문에 들어가는 이미지들은 애초에 글을 쓸 때 링크를 걸어놓고 본문을 쓰고, 본문이 불러와질때 자체적으로 get요청을 해서 이미지를 렌더링하니까!
+  * 근데 처음에 글 쓸때 이미지를 사용자에게 받는 건 썸네일+본문이미지 전체를 받아서 서버에 이미지를 저장해둬야함
+  * 그럼 여러개의 파일을 동시에 업로드해야하는데, 여러개 이미지를 input file 태그로 받는 건 multiple 속성을 통해 가능 (코드첨부하기)
+  * 근데 그 여러개 선택된 이미지파일을 클라이언트에서 정제해서 서버로 보내줘야하고 서버도 여러개의 이미지 파일을 한 번에 받아서 저장해야함
+  * + 데이터 전송은 저장하기 버튼 누르면 한꺼번에 데이터가 서버로 업로드 되어야하는데, 이미지는 multiform 형식이고, 나머지는 json 형식임
+  
+
+  서버사이드
+
+  f, err := c.FormFile("file")
+			if err != nil {
+				http.Error(c.Writer, err.Error(), http.StatusBadRequest)
+				return
+			}
+			file, err := f.Open()
+			if err != nil {
+				fmt.Println("IMG OPEN ERROR")
+        }
+			defer file.Close()
+			loc, err := os.Create("../IMAGES/"+f.Filename)
+			if err != nil {
+				fmt.Println("FOLDER OPEN ERROR")
+        }
+			defer loc.Close()
+			_, err = io.Copy(loc, file)
+      if err != nil {
+				fmt.Println("COPY ERROR")
+			}
+			c.Writer.WriteHeader(http.StatusOK)
+
+
+
+  -> 
+
+
+  d, _ := c.MultipartForm()
+			fff := d.File["FileList"]    
+      ------>>>>(왜 filelist로 적었는지 이미지 첨부하기:멀티파트이미지7)
+			for _, v := range fff {
+				c.SaveUploadedFile(v, "/Users/yunsuk/blog-ver2-server/src/IMAGES/"+v.Filename)
+			}
+      c.Writer.WriteHeader(http.StatusOK)
+
+
+
+
+
+ d, _ := c.MultipartForm()
+			fff := d.File["0"]    
+      ------>>>>(왜 0으로 적었는지 이유 설명첨부하기:멀티파트이미지8)
+			for _, v := range fff {
+				c.SaveUploadedFile(v, "/Users/yunsuk/blog-ver2-server/src/IMAGES/"+v.Filename)
+			}
+      c.Writer.WriteHeader(http.StatusOK)
+
+      

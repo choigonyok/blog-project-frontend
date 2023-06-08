@@ -14,10 +14,12 @@ const Adminpage = () => {
   const [tagText, setTagText] = useState("");
   const [dateText, setDateText] = useState("");
   const [bodyText, setBodyText] = useState("");
-  const [img, setIMG] = useState("");
+  const [img, setIMG] = useState([]);
   const [unlock, setUnLock] = useState(false);
   const navigate = useNavigate();
   const mounted = useRef(false);
+
+  console.log(img);
 
   useEffect(() => {
     setBodyText(md);
@@ -36,16 +38,19 @@ const Adminpage = () => {
   };
 
   const imgHandler = (e) => {
-    setIMG(e.target.files[0]);
-    console.log(img);
+    setIMG(e.target.files);
   };
+
+  
 
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
     } else {
       const formData = new FormData();
-      formData.append("file", img);
+      for (let i = 0; i < img.length; i++) {
+        formData.append("file", img[i]);
+      }
       axios
         .post("http://localhost:8080/postdata/img", formData, {
           "Content-type": "multipart/form-data",
@@ -68,6 +73,7 @@ const Adminpage = () => {
       datetime: dateText,
       body: bodyText,
     };
+    console.log(postdata);
     axios
       .post("http://localhost:8080/postdata/post", postdata)
       .then((response) => {
@@ -108,7 +114,7 @@ const Adminpage = () => {
           {/* <input type="button" value="적용" onClick={DateClickHandler} /> */}
         </div>
         <div className="admin-titletagdate">
-          <input type="file" required multiple onChange={imgHandler} />
+          <input type="file" required multiple id="fileinput" onChange={imgHandler} />
         </div>
         <div>
           <div className="admin-editor">
