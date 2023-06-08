@@ -29,7 +29,7 @@ const Button = (props) => {
       .get("http://localhost:8080/tag")
       .then((response) => {
         // 응답 데이터 수신
-        console.log(response.data);
+        // console.log(response.data);
         setTagsData(response.data);
 
         // props.onSeeTaggedPost(jsonArray);

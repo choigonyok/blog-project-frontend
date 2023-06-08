@@ -2,13 +2,26 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 10%;
-  margin-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10%;
+  justify-content: center;
+  align-items: center;
+}
+.admin-container__sample {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10%;
   justify-content: center;
 }
 .admin-editor {
   margin-top: 2rem;
-  width: 100%;
+  width: 1200px;
+  font-family: sans-serif !important;
 }
 .admin-main {
   text-align: center;
@@ -16,7 +29,8 @@
 }
 .admin-titletagdate {
   margin: 1rem;
-  width: auto;
+  width: 700px;
+  font-size: 16px;
   height: auto;
   text-align: center;
 }
@@ -27,10 +41,15 @@
   height: auto;
   align-items: center;
 }
-
+.sample-container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  align-items: center;
+}
 textarea {
   width: 600px;
-  height: 2rem;
   border: 5px solid rgb(38, 46, 59);
   background-color: rgb(59, 59, 59);
   background-clip: padding-box;
@@ -38,5 +57,40 @@ textarea {
   border-radius: 30px;
   transition: 300ms;
   resize: none;
-  overflow-y:hidden;
+  overflow-y: hidden;
+  height: 2rem;
+}
+.w-md-editor-text-input {
+  font-size: 16px;
+  letter-spacing: 0.26px !important;
+  word-spacing: 1px !important;
+  line-height: 202% !important;
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  padding: 3%;
+  justify-content: center;
+  text-align: center;
+}
+.admin-button {
+  font-size: 20px;
+  width: auto;
+  text-align: center;
+  padding: 2%;
+  border: 5px solid rgb(255, 42, 0, 0.75);
+  background-color: rgb(232, 232, 232);
+  background-clip: padding-box;
+  color: black;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.sample-title {
+  display: flex;
+  margin-top: 2%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
 }

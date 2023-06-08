@@ -421,3 +421,26 @@ ret := []TagButtonData{}
 
 태그버튼 중복 제거도 구현 완료!
 
+
+
+* GO DB 작성할 때 스트링을 건드려야하는 작업이면
+"대신 `백틱 쓰는 거 잊지말기!
+
+
+* GO에는 상대경로 개념이 없다.
+os.create()에 절대경로 넣어야함
+
+로직
+클라이언트에서 post data 따로, 이미지파일 따로 post 파라미터 통해서 두번 받아오고
+이미지파일은 go에서 create하고 받은 파일 open해서
+open한 파일 create한 파일에 io.copy로 복사
+둘다 defer로 닫아주기
+
+문제 : 
+1. json은 json형식으로, 파일은 multipart/form-data로 받아야하는데, 둘 다 한 번에 하려다가 오류
+2. 리액트에서 post할 때 헤더에 컨텐트타입 명시해줘야하는데 헤더 쓰는 법 몰라서 오류
+3.  const formData = new FormData();
+    formData.append("file", img); 이거 몰라서 오류
+4. e.target.files[0] 이거 몰라서 오류
+5. post요청 두개 비동기 실행되서 오류
+
