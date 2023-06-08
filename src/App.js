@@ -11,7 +11,8 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Homepage/>} />
         <Route path="/post/:postid" element={<Postpage/>} />
-        <Route path="/admin" element={<Deletepage/>} />
+        <Route path="/admin/delete" element={<Deletepage/>} />
+        <Route path="/admin/write" element={<Writepage/>} />
       </Routes>
     </BrowserRouter>
   );
