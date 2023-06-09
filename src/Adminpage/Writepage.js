@@ -76,7 +76,6 @@ const Writepage = () => {
     axios
       .post("http://localhost:8080/post/post", postdata)
       .then((response) => {
-        setUnLock(true);
       })
       .catch((error) => {
         console.error(error);
