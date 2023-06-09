@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
+import { useRef } from "react";
 
 const Postpage = () => {
+  const mounted = useRef(false);
   let { postid } = useParams();
 
   const [postData, setPostData] = useState([]);
@@ -29,20 +31,24 @@ const Postpage = () => {
   useEffect(() => {
     // POST 요청 보내기
 
-    axios
-      .post("http://localhost:8080/tag", postData)
-      .then((response) => {
-        // 응답 데이터 수신
-        const jsonArray = Object.values(response.data);
+    if (!mounted.current) {
+      mounted.current = true;
+    } else {
+      axios
+        .post("http://localhost:8080/tag", postData)
+        .then((response) => {
+          // 응답 데이터 수신
+          const jsonArray = Object.values(response.data);
 
-        console.log(jsonArray.filter((post) => String(post.Id) !== postid));
-        setRelatedPostData(
-          jsonArray.filter((post) => String(post.Id) !== postid)
-        );
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+          console.log(jsonArray.filter((post) => String(post.Id) !== postid));
+          setRelatedPostData(
+            jsonArray.filter((post) => String(post.Id) !== postid)
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, [postData]);
 
   return (
@@ -70,7 +76,7 @@ const Postpage = () => {
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>
-     
+
       {relatedPostData && <Card postdata={relatedPostData} />}
       <Footer />
     </div>

@@ -584,3 +584,48 @@ const imgHandler = (e) => {
       c.Writer.WriteHeader(http.StatusOK)
 
       
+
+      
+
+
+**게시글 삭제 구현하기**
+      const [isDeleted, setIsDeleted] = useState(false);
+  const [allPost, setAllPost] = useState();
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/post/all")
+      .then((response) => {
+        console.log(response.data);
+        setAllPost(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [isDeleted]);
+
+  const deleteHandler = (value) => {
+    console.log(value);
+    axios
+      .delete("http://localhost:8080/post/delete" + value)
+      .then((response) => {
+        console.log(response.data);
+        setIsDeleted(true);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+  컴포넌트 마운트시 (delete 페이지 클릭되면)
+  서버에 전체 게시글 get요청해서 받아오고
+  allpost usestate 변경해서 리렌더링하면서 게시글 표시
+
+  게시글 별로 있는 삭제버튼 클릭되면 deleteHandler핸들러가 해당 포스트 id 파라미터와 같이 콜링됨
+  이벤트 핸들러에 파라미터 전달하는법
+      onClick={() =>{deleteHandler(item.Id)}}
+  서버에 해당 id를 가진 게시물 DELETE요청 보내고
+  응답오면 (잘 삭제 됐으면) isdeleted usestate를 true로 변경
+
+  그럼 useEffect에 [] 값으로 isDeleted를 갖고있던 전체게시글 get요청이 다시 실행되면서
+전체게시글 get요청을 서버에 보내고, 결론적으로 게시글 삭제가 업데이트된 전체 게시물을 표시
