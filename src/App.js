@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Postpage from "./Postpage/Postpage";
 import Writepage from "./Adminpage/Writepage";
 import Deletepage from "./Adminpage/Deletepage";
+import Loginpage from "./Adminpage/Loginpage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/post/:postid" element={<Postpage/>} />
         <Route path="/admin/delete" element={<Deletepage/>} />
         <Route path="/admin/write" element={<Writepage/>} />
+        <Route path="/admin" element={<Loginpage/>} />
       </Routes>
     </BrowserRouter>
   );

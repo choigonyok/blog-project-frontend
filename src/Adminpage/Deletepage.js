@@ -106,13 +106,13 @@ const Deletepage = () => {
         {toModify && (
           <div className="modify-container">
             <div className="admin-titletagdate">
-              <textarea value={tagText} onChange={tagHandler} />
+              <input type="text" value={tagText} onChange={tagHandler} />
             </div>
             <div className="admin-titletagdate">
-              <textarea value={titleText} onChange={titleHandler} />
+              <input type="text" value={titleText} onChange={titleHandler} />
             </div>
             <div className="admin-titletagdate">
-              <textarea value={dateText} onChange={dateHandler} />
+              <input type="text" value={dateText} onChange={dateHandler} />
             </div>
             {/* <div className="admin-titletagdate">
               <input

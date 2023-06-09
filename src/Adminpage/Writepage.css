@@ -1,3 +1,57 @@
+input[type="text"]:focus{
+  border: 5px solid rgb(255, 42, 0);
+  transition: 400ms;
+}
+input[type="text"]:hover{
+  border: 5px solid rgb(255, 42, 0);
+  transition: 400ms;
+}
+
+input[type="password"]:focus{
+  border: 5px solid rgb(255, 42, 0);
+  transition: 400ms;
+}
+input[type="password"]:hover{
+  border: 5px solid rgb(255, 42, 0);
+  transition: 400ms;
+}
+
+
+input[type="text"]{
+  width: 600px;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  color: white;
+  padding: 1%;
+  padding-left: 2.5%;
+  border-radius: 30px;
+  font-size: 17px;
+  height: auto;
+  outline: none;
+  transition: 400ms;
+}
+
+input[type="password"]{
+  width: 600px;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  color: white;
+  padding: 1%;
+  padding-left: 2.5%;
+  border-radius: 30px;
+  font-size: 17px;
+  height: auto;
+  outline: none;
+  transition: 400ms;
+}
+
+.admin-button:hover{
+  background-color: black;
+  border: 5px solid rgb(255, 42, 0);
+  color: white;
+  transition: 300ms;
+}
+
 .admin-container {
   display: flex;
   flex-direction: column;
@@ -28,11 +82,12 @@
   font-size: 60px;
 }
 .admin-titletagdate {
-  margin: 1rem;
+  margin: 0.5rem;
   width: 700px;
   font-size: 16px;
   height: auto;
   text-align: center;
+  
 }
 .sample-container {
   display: flex;
@@ -47,18 +102,6 @@
   width: auto;
   height: auto;
   align-items: center;
-}
-textarea {
-  width: 600px;
-  border: 5px solid rgb(38, 46, 59);
-  background-color: rgb(59, 59, 59);
-  background-clip: padding-box;
-  color: white;
-  border-radius: 30px;
-  transition: 300ms;
-  resize: none;
-  overflow-y: hidden;
-  height: 2rem;
 }
 .w-md-editor-text-input {
   font-size: 16px;
@@ -79,12 +122,13 @@ textarea {
   width: auto;
   text-align: center;
   padding: 2%;
-  border: 5px solid rgb(255, 42, 0, 0.75);
-  background-color: rgb(232, 232, 232);
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(240, 236, 255);
   background-clip: padding-box;
   color: black;
   border-radius: 30px;
   cursor: pointer;
+  transition: 500ms;
 }
 .sample-title {
   display: flex;

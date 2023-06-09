@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 const Writepage = () => {
+  
+
+
   const [md, setMD] = useState("");
   const [titleText, setTitleText] = useState("");
   const [tagText, setTagText] = useState("");
@@ -87,7 +90,7 @@ const Writepage = () => {
       <div className="admin-container">
         <div className="admin-main">WRITE PAGE</div>
         <div className="admin-titletagdate">
-          <textarea
+          <input type="text"
             placeholder="TAGS : PROJECT / BLOG"
             value={tagText}
             onChange={tagHandler}
@@ -95,7 +98,7 @@ const Writepage = () => {
           {/* <input type="button" value="적용" onClick={TagClickHandler} /> */}
         </div>
         <div className="admin-titletagdate">
-          <textarea
+          <input type="text"
             placeholder="TITLE : [BLOG #1] 블로그 개발하기"
             value={titleText}
             onChange={titleHandler}
@@ -104,7 +107,7 @@ const Writepage = () => {
         </div>
 
         <div className="admin-titletagdate">
-          <textarea
+          <input type="text"
             placeholder="DATE : 2023-01-01"
             value={dateText}
             onChange={dateHandler}
