@@ -51,7 +51,7 @@ const Writepage = () => {
         formData.append("file", img[i]);
       }
       axios
-        .post("http://localhost:8080/postdata/img", formData, {
+        .post("http://localhost:8080/post/img", formData, {
           "Content-type": "multipart/form-data",
         })
         .then((response) => {
@@ -74,7 +74,7 @@ const Writepage = () => {
     };
     console.log(postdata);
     axios
-      .post("http://localhost:8080/postdata/post", postdata)
+      .post("http://localhost:8080/post/post", postdata)
       .then((response) => {
         setUnLock(true);
       })
@@ -123,7 +123,7 @@ const Writepage = () => {
         <div className="admin-container__sample">
           <div className="sample-title">
             <div className="post-tagsbox">
-              <div className="post-tags__button">{tagText}</div>
+              {tagText && <div className="post-tags__button">{tagText}</div>}
             </div>
             <div className="post-title__item">{titleText}</div>
             <div className="written-date">{dateText}</div>

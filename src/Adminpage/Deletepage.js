@@ -32,6 +32,8 @@ const Deletepage = () => {
       });
   };
 
+  
+
   return (
     <div>
       <Header />
@@ -60,6 +62,7 @@ const Deletepage = () => {
                       className="delete-button"
                       type="button"
                       value="수정"
+                      
                     />
                   </div>
                 </div>
