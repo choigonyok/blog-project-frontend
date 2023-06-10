@@ -2,11 +2,11 @@
   display: flex;
   width: auto;
   height: auto;
-  margin-top: 8%;
   text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin-top: 2%;
 }
 
 .home-image {
@@ -16,7 +16,7 @@
   justify-content: center;
   width: 130px;
   height: 130px;
-  margin-top: 5%;
+  margin-top: 0;
   margin-bottom: 0;
   align-items: center;
   object-fit: cover;
@@ -35,6 +35,13 @@
   text-align: center;
 }
 
+.visitnum {
+  display: flex;
+  width: inherit;
+  height: auto;
+  margin-top: 8%;
+  justify-content: center;
+}
 
 .introduce-text__text {
   display: flex;
@@ -61,7 +68,7 @@
   justify-content: center;
   width: 20px;
   height: 20px;
-  object-fit:fill;
+  object-fit: fill;
   align-items: center;
   object-fit: cover;
 }

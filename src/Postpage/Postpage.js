@@ -9,12 +9,26 @@ import MDEditor from "@uiw/react-md-editor";
 import { useRef } from "react";
 
 const Postpage = () => {
+  axios.defaults.withCredentials = true;
+  
   let { postid } = useParams();
 
   const [changeEvent, setChangeEvent] = useState(false);
   const mounted = useRef(false);
   const [postData, setPostData] = useState([]);
   const [relatedPostData, setRelatedPostData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/cookie")
+      .then((response) => {
+        console.log(response.data.VisitNumber);
+        console.log(response.data.TotalNumber);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

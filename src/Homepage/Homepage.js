@@ -3,13 +3,31 @@ import Header from "../Header/Header";
 import Button from "../UI/Button";
 import Footer from "../UI/Footer";
 import Card from "../UI/Card";
-
+import axios from "axios";
 import profileimage from "../Assets/IMG_0071 2.jpg";
 import github from "../Assets/Icons/github-icon.png";
 import instagram from "../Assets/Icons/instagram-icon.png";
 import { useState, useEffect } from "react";
 
 const Homepage = () => {
+  axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/cookie")
+      .then((response) => {
+        console.log(response.data.VisitNumber);
+        console.log(response.data.TotalNumber);
+        setTotalNum(response.data.TotalNumber);
+        setVisitNum(response.data.VisitNumber);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },[]);
+
+  const [totalNum, setTotalNum] = useState("");
+  const [visitNum, setVisitNum] = useState("");
   const [changeEvent, setChangeEvent] = useState(false);
   const [postData, setPostData] = useState([]);
 
@@ -25,6 +43,9 @@ const Homepage = () => {
     <div>
       <Header /> {/* 6/2 Header 컴포넌트 재사용 위해서 분리 */}
       <div className="introduce">
+        <div className="visitnum">
+          <h5>TODAY : {visitNum} / TOTAL : {totalNum}</h5>
+        </div>
         <div className="home-image__container">
           <img className="home-image" alt="my" src={profileimage} />
         </div>
