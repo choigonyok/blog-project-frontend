@@ -56,14 +56,16 @@ const Writepage = () => {
       axios
         .post("http://localhost:8080/post/img", formData, {
           "Content-type": "multipart/form-data",
+          "withCredentials" : true
         })
         .then((response) => {
           // 응답 데이터 수신
           console.log("POST2 Success");
           navigate("/");
         })
-        .catch((error) => {
+        .catch((error) => {          
           console.error(error);
+          alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
         });
     }
   }, [unlock]);
@@ -77,12 +79,13 @@ const Writepage = () => {
     };
     console.log(postdata);
     axios
-      .post("http://localhost:8080/post/post", postdata)
+      .post("http://localhost:8080/post/post", postdata,{withCredentials: true})
       .then((response) => {
         setUnLock(true);
       })
       .catch((error) => {
         console.error(error);
+        alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
       });
   };
   return (

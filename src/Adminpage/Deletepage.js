@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 
 const Deletepage = () => {
+  axios.defaults.withCredentials = true;
+  
   const [md, setMD] = useState("");
   const [titleText, setTitleText] = useState("");
   const [tagText, setTagText] = useState("");
@@ -49,7 +51,7 @@ const Deletepage = () => {
       body: bodyText,
     };
     axios
-      .post("http://localhost:8080/mod/" + id, postdata)
+      .post("http://localhost:8080/mod/" + id, postdata, {withCredentials: true})
       .then((response) => {
         console.log("SUCCESSSSS");
         setToModify(false);
@@ -57,12 +59,13 @@ const Deletepage = () => {
       })
       .catch((error) => {
         console.error(error);
+        alert("게시글 수정 권한이 없습니다. 로그인을 해주세요!");
       });
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/post/all")
+      .get("http://localhost:8080/post/all",{})
       .then((response) => {
         setAllPost(response.data);
       })
@@ -73,13 +76,14 @@ const Deletepage = () => {
 
   const deleteHandler = (value) => {
     axios
-      .delete("http://localhost:8080/post/delete" + value)
+      .delete("http://localhost:8080/post/delete" + value, {withCredentials: true})
       .then((response) => {
         setPostData(response.data);
         setIsDeleted(!isDeleted);
       })
       .catch((error) => {
         console.error(error);
+        alert("게시글 삭제 권한이 없습니다. 로그인을 해주세요!");
       });
   };
 
@@ -134,7 +138,7 @@ const Deletepage = () => {
               <input
                 type="button"
                 className="admin-button"
-                value="POST 추가하기"
+                value="이 내용으로 수정하기"
                 onClick={postHandler}
               />
             </div>

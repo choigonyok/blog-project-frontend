@@ -719,3 +719,39 @@ https://stackoverflow.com/questions/63545884/sending-cookie-from-back-in-go-its-
 
       서버와 클라이언트가 default가 아닌 헤더에 뭔갈 담아서 주고받으려면 서로 credentials을 설정해줘야
       하는 것 같음
+
+
+
+      클라이언트에서 서버에 요청을 할 때, 브라우저는 기본적으로 해당 도메인에 대한 쿠키를 요청과 함께 자동으로 보냅니다. 이는 브라우저의 쿠키 관리 기능에 의해 처리되며, 개발자가 별도로 설정하지 않아도 됩니다.
+
+
+
+
+
+
+
+       
+
+
+
+
+       기본적인 simple request가 아니면 보안을 위해
+       http가 options 요청을 보냄(사전요청)
+       서버가 그럼 요청에 맞는 헤더로 이거 이상한 요청 아니다 괜찮다 알려주면
+       그제서야 본요청하고 서버는 응답
+       그래서 allow access 이난리 설정을 해줘야함
+       go gin에는 config 미들웨어가 있어서 이거 활용
+
+config := cors.DefaultConfig()
+config.AllowOrigins = []string{"http://localhost:3000"} // 허용할 오리진 설정
+config.AllowMethods= []string{"POST", "DELETE"}
+config.AllowHeaders = []string{"cookie", "Content-type"}
+config.AllowCredentials = true
+
+
+
+그리고 리액트에서 해당 이상한 요청(쿠키가 헤더에 있는 요청)등을 서버에 할 때
+.delete("http://localhost:8080/post/delete" + value, {withCredentials: true})
+헤더에 
+withCredentials: true
+를 넣어줘야함 이게 헤더에 인증/인가 관련 내용을 넣어 보내겠다는 뜻
