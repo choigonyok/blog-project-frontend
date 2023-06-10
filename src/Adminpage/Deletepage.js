@@ -15,9 +15,10 @@ const Deletepage = () => {
   // const [img, setIMG] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [toModify, setToModify] = useState(false);
-  const [allPost, setAllPost] = useState();
+  const [allPost, setAllPost] = useState(false);
   const [postData, setPostData] = useState([]);
 
+  
  
 
   useEffect(() => {
@@ -51,8 +52,8 @@ const Deletepage = () => {
       .post("http://localhost:8080/mod/" + id, postdata)
       .then((response) => {
         console.log("SUCCESSSSS");
-        setIsDeleted(true);
         setToModify(false);
+        setIsDeleted(!isDeleted);
       })
       .catch((error) => {
         console.error(error);
@@ -68,14 +69,14 @@ const Deletepage = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [isDeleted]);
+  }, [isDeleted]); // 뭐 넣을지 고민
 
   const deleteHandler = (value) => {
     axios
       .delete("http://localhost:8080/post/delete" + value)
       .then((response) => {
-        setIsDeleted(true);
         setPostData(response.data);
+        setIsDeleted(!isDeleted);
       })
       .catch((error) => {
         console.error(error);
@@ -83,6 +84,7 @@ const Deletepage = () => {
   };
 
   const modifyHandler = (value) => {
+    
     axios
       .get("http://localhost:8080/post/" + value)
       .then((response) => {

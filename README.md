@@ -629,3 +629,93 @@ const imgHandler = (e) => {
 
   그럼 useEffect에 [] 값으로 isDeleted를 갖고있던 전체게시글 get요청이 다시 실행되면서
 전체게시글 get요청을 서버에 보내고, 결론적으로 게시글 삭제가 업데이트된 전체 게시물을 표시
+
+
+
+
+
+# 비밀번호 암호화 
+(솔트란) https://ko.wikipedia.org/wiki/%EC%86%94%ED%8A%B8_(%EC%95%94%ED%98%B8%ED%95%99)
+(공식도큐먼트) https://www.npmjs.com/package/bcrypt
+
+bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+        // Store hash in your password DB.
+    });
+});
+
+암호화 원리
+
+회원가입
+아이디랑 비밀번호를 클라이언트에 입력
+-> 클라이언트에서 비밀번호에 salt를 더하고(1차보안) 해쉬함수에 넣어(2차보안) 결과물을 뽑아냄
+-> 결과를 서버에 전송
+-> 서버가 DB에 저장
+로그인
+아이디랑 비밀번호를 클라이언트에 입력
+-> 클라이언트에서 아이디로 서버에 post 요청 보냄
+-> 서버는 DB에서 id에 맞는 암호화된 비밀번호 응답
+-> 클라이언트는 사용자가 입력한 pw에 salt 더해서 해시함수로 암호화하고, 서버가 준 암호화 pw랑 비교
+-> 같으면 로그인 성공 아니면 실패
+-> 성공하면 세션 발급
+
+가 아니라
+암호화는 서버에서 함
+
+레인보우 공격테이블 방지를 위한
+솔트랑 키 스트레칭(cost)
+
+
+
+쿠키설정
+https://github.com/ladjs/superagent/issues/1091
+https://knight76.tistory.com/entry/cookie-%EA%B3%B5%EB%B6%80-superagent
+이거보고 아 쿠키를 본문에 넣어서 보내야하는 건가? 
+
+
+근데 리액트의
+  console.log(response.headers["set-cookie"]);
+  에서는 undefined로 읽힘 위에 티스토리 글처럼 react에서는 헤더중에 content-type header만 직접적으로 읽을 수 있는 거 같음. (로그인쿠키 이미지1)
+서버에서 set한 쿠키가 브라우저에 잘 전송되어도 사진처럼 리액트에서 헤더를 읽으면 set-cookie 헤더는 볼 수 없음
+
+*** go**
+cookie := &http.Cookie{
+					Name:  "myCookie",
+					Value: "exampleValue",
+					Path:  "/",
+				}
+			
+				// 쿠키를 헤더로 전달
+				http.SetCookie(c.Writer, cookie)
+
+  gin의 c.setcookie()가 이상한 건 줄 알고 http 패키지도 이용해봤는데 안됨,
+  생각해보니까 이전에 블로그 개발했을 땐 c.setcookie로 브라우저에 잘 전달 했었음
+  쿠키에 대해선 감을 잡았다고 생각했는데...
+
+  setcookie는 헤더에 추가만 하는 메서드라고 해서
+  c.String(http.StatusOK, "COOKIE 보냈음")도 추가해서 응답까지 확실하게 보내봤음
+  근데 'COOKIE 보냈음'은 잘 가서 브라우저 콘솔에 출력되는데, cookie는 undefined..
+
+  그러다가
+  서버에서 보낸 헤더를 다른 오리진에서 읽으려면 크리덴셜을 설정해줘야한다고 함
+  이게 뭐지?
+    config.AllowCredentials = true
+어쨌든 서버 시작할 때 설정되도록 적어봄
+그래도 안됌
+
+
+구글링과 스택오버플로우를 막 뒤지다가
+https://stackoverflow.com/questions/63545884/sending-cookie-from-back-in-go-its-an-api-rest-to-front-end-with-react-js
+질문을 올린거긴한데 헤더에 저걸 넣어보자!
+해서 넣었더니 브라우저에 쿠키가 잘 출력됨
+
+				c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+
+
+
+      리액트에도 axios.defaults.withCredentials = true;
+      를 설정해줘야함
+      
+
+      서버와 클라이언트가 default가 아닌 헤더에 뭔갈 담아서 주고받으려면 서로 credentials을 설정해줘야
+      하는 것 같음

@@ -3,11 +3,13 @@ import Header from "../Header/Header";
 import Footer from "../UI/Footer";
 import "./Loginpage.css";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const Loginpage = () => {
-  const [cookies, setCookie, removeCookie] = useCookies();
+        axios.defaults.withCredentials = true;
   const [id, setID] = useState();
   const [pw, setPW] = useState();
+  const [cookies, setCookie] = useCookies(["admin"]);
 
   const idHandler = (e) => {
     console.log(id);
@@ -18,6 +20,19 @@ const Loginpage = () => {
     setPW(e.target.value);
   };
 
+  const loginHandler = () => {
+    const logindata = { id: id, pw: pw };
+    console.log(logindata);
+    axios
+      .post("http://localhost:8080/login/pw", logindata)
+      .then((response) => {
+        alert("You are logged in.");
+        console.log(response.data);
+      })
+      .catch((error) => {
+        alert("ID or PW doesn't match.");
+      });
+  };
 
   return (
     <div>
@@ -34,7 +49,12 @@ const Loginpage = () => {
           />
         </div>
         <div className="login-button">
-          <input type="button" className="admin-button" value="LOGIN" />
+          <input
+            type="button"
+            className="admin-button"
+            value="LOGIN"
+            onClick={loginHandler}
+          />
         </div>
       </div>
       <Footer />
