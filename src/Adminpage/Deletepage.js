@@ -7,7 +7,8 @@ import MDEditor from "@uiw/react-md-editor";
 
 const Deletepage = () => {
   axios.defaults.withCredentials = true;
-  
+
+  const [changeEvent, setChangeEvent] = useState(false);
   const [md, setMD] = useState("");
   const [titleText, setTitleText] = useState("");
   const [tagText, setTagText] = useState("");
@@ -20,12 +21,79 @@ const Deletepage = () => {
   const [allPost, setAllPost] = useState(false);
   const [postData, setPostData] = useState([]);
 
-  
- 
+  const postHandler = () => {
+    const postdata = {
+      title: titleText,
+      tag: tagText,
+      datetime: dateText,
+      body: bodyText,
+    };
+    axios
+      .post("http://localhost:8080/mod/" + id, postdata, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log("SUCCESSSSS");
+        setToModify(false);
+        setIsDeleted(!isDeleted);
+        setChangeEvent(!changeEvent);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("게시글 수정 권한이 없습니다. 로그인을 해주세요!");
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/post/all", {})
+      .then((response) => {
+        setAllPost(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [isDeleted]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [changeEvent]);
 
   useEffect(() => {
     setBodyText(md);
   }, [md]);
+
+  const deleteHandler = (value) => {
+    axios
+      .delete("http://localhost:8080/post/delete" + value, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setPostData(response.data);
+        setIsDeleted(!isDeleted);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("게시글 삭제 권한이 없습니다. 로그인을 해주세요!");
+      });
+  };
+
+  const modifyHandler = (value) => {
+    axios
+      .get("http://localhost:8080/post/" + value)
+      .then((response) => {
+        setToModify(true);
+        setID(value);
+        setTitleText(response.data[0].Title);
+        setTagText(response.data[0].Tag);
+        setDateText(response.data[0].Datetime);
+        setMD(response.data[0].Body);
+        setChangeEvent(!changeEvent);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const titleHandler = (e) => {
     setTitleText(e.target.value);
@@ -42,67 +110,6 @@ const Deletepage = () => {
   // const imgHandler = (e) => {
   //   setIMG(e.target.files);
   // };
-
-  const postHandler = () => {
-    const postdata = {
-      title: titleText,
-      tag: tagText,
-      datetime: dateText,
-      body: bodyText,
-    };
-    axios
-      .post("http://localhost:8080/mod/" + id, postdata, {withCredentials: true})
-      .then((response) => {
-        console.log("SUCCESSSSS");
-        setToModify(false);
-        setIsDeleted(!isDeleted);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("게시글 수정 권한이 없습니다. 로그인을 해주세요!");
-      });
-  };
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/post/all",{})
-      .then((response) => {
-        setAllPost(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [isDeleted]); // 뭐 넣을지 고민
-
-  const deleteHandler = (value) => {
-    axios
-      .delete("http://localhost:8080/post/delete" + value, {withCredentials: true})
-      .then((response) => {
-        setPostData(response.data);
-        setIsDeleted(!isDeleted);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("게시글 삭제 권한이 없습니다. 로그인을 해주세요!");
-      });
-  };
-
-  const modifyHandler = (value) => {
-    
-    axios
-      .get("http://localhost:8080/post/" + value)
-      .then((response) => {
-        setToModify(true);
-        setID(value);
-        setTitleText(response.data[0].Title);
-        setTagText(response.data[0].Tag);
-        setDateText(response.data[0].Datetime);
-        setMD(response.data[0].Body);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   return (
     <div>

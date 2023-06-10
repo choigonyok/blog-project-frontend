@@ -735,12 +735,36 @@ https://stackoverflow.com/questions/63545884/sending-cookie-from-back-in-go-its-
 
 
 
-       기본적인 simple request가 아니면 보안을 위해
-       http가 options 요청을 보냄(사전요청)
-       서버가 그럼 요청에 맞는 헤더로 이거 이상한 요청 아니다 괜찮다 알려주면
-       그제서야 본요청하고 서버는 응답
-       그래서 allow access 이난리 설정을 해줘야함
-       go gin에는 config 미들웨어가 있어서 이거 활용
+       
+
+
+
+그리고 리액트에서 해당 이상한 요청(쿠키가 헤더에 있는 요청)등을 서버에 할 때
+.delete("http://localhost:8080/post/delete" + value, {withCredentials: true})
+헤더에 
+withCredentials: true
+를 넣어줘야함 이게 헤더에 인증/인가 관련 내용을 넣어 보내겠다는 뜻
+
+
+서버사이드렌더링 쿠키는 클라이언트측(리액트)에서 처리할 수 없고 클라이언트에서 서버에 요청하면 쿠키는 자동으로 헤더에 넣어서 들어간다는 거 모르고, react cookie 라이브러리 막 찾아서 cookie.get setcookie cookie 다 해봤는데, 이건 클라이언트사이드렌더링일 때 (쿠키를 클라이언트에서 만들고 저장하고 관리하고 지우고) 쓰는 거였음
+https://kkhcode.tistory.com/9 
+https://velog.io/@bunny/react-cookie
+이런거 막 다 해봄
+document.cookie 쓰라는 사람도 있었는데, 이제 서버사이드쿠키를 이런걸로 읽게 구현했다가는 크로스사이트 공격 당할 수 있음. 그래서 서버사이드에서 쿠키할거면 아예 클라이언트는 관여 안하든가, 반대로 하든가 하는 거 같음
+https://velog.io/@bigbrothershin/Next.js-SSR-cookie-%EB%84%A3%EC%96%B4%EC%A3%BC%EA%B8%B0
+
+그러나가 갖가지 종류의 이 세상 모든 cors가 다 나왔고
+하나 배운 거는
+
+기본적인 simple request가 아니면 보안을 위해
+http가 options 요청을 보냄(사전요청)
+서버가 그럼 요청에 맞는 헤더로 이거 이상한 요청 아니다 괜찮다 알려주면
+그제서야 본요청하고 서버는 응답
+https://yeonyeon.tistory.com/236 
+https://www.popit.kr/cors-preflight-%EC%9D%B8%EC%A6%9D-%EC%B2%98%EB%A6%AC-%EA%B4%80%EB%A0%A8-%EC%82%BD%EC%A7%88/
+그림 도움됨
+그래서 allow access 이난리 설정을 해줘야함
+go gin에는 config 미들웨어가 있어서 이거 활용
 
 config := cors.DefaultConfig()
 config.AllowOrigins = []string{"http://localhost:3000"} // 허용할 오리진 설정
@@ -750,8 +774,9 @@ config.AllowCredentials = true
 
 
 
-그리고 리액트에서 해당 이상한 요청(쿠키가 헤더에 있는 요청)등을 서버에 할 때
-.delete("http://localhost:8080/post/delete" + value, {withCredentials: true})
-헤더에 
-withCredentials: true
-를 넣어줘야함 이게 헤더에 인증/인가 관련 내용을 넣어 보내겠다는 뜻
+https://brownbears.tistory.com/337
+https://a3magic3pocket.github.io/posts/cors/
+https://kimyhcj.tistory.com/263 - 3번 서버사이드에서 처리하기
+
+프록시(서버와 서버 사이의 서버느낌)를 설정해서 할 수도 있다는데, 그럼 너무 쉬워지잖아~
+프록시는 서버 클라이언트 아키텍처가 많이 이해가 잘 되면 그 때나 한 번 써봐야지

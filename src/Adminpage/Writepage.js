@@ -8,9 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 const Writepage = () => {
-  
-
-
   const [md, setMD] = useState("");
   const [titleText, setTitleText] = useState("");
   const [tagText, setTagText] = useState("");
@@ -21,11 +18,26 @@ const Writepage = () => {
   const navigate = useNavigate();
   const mounted = useRef(false);
 
-  console.log(img);
-
-  useEffect(() => {
-    setBodyText(md);
-  }, [md]);
+  const postHandler = (e) => {
+    const postdata = {
+      title: titleText,
+      tag: tagText,
+      datetime: dateText,
+      body: bodyText,
+    };
+    console.log(postdata);
+    axios
+      .post("http://localhost:8080/post/post", postdata, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setUnLock(true);
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
+      });
+  };
 
   const titleHandler = (e) => {
     setTitleText(e.target.value);
@@ -43,7 +55,9 @@ const Writepage = () => {
     setIMG(e.target.files);
   };
 
-  
+  useEffect(() => {
+    setBodyText(md);
+  }, [md]);
 
   useEffect(() => {
     if (!mounted.current) {
@@ -56,45 +70,28 @@ const Writepage = () => {
       axios
         .post("http://localhost:8080/post/img", formData, {
           "Content-type": "multipart/form-data",
-          "withCredentials" : true
+          withCredentials: true,
         })
         .then((response) => {
           // 응답 데이터 수신
           console.log("POST2 Success");
           navigate("/");
         })
-        .catch((error) => {          
+        .catch((error) => {
           console.error(error);
           alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
         });
     }
   }, [unlock]);
 
-  const postHandler = (e) => {
-    const postdata = {
-      title: titleText,
-      tag: tagText,
-      datetime: dateText,
-      body: bodyText,
-    };
-    console.log(postdata);
-    axios
-      .post("http://localhost:8080/post/post", postdata,{withCredentials: true})
-      .then((response) => {
-        setUnLock(true);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
-      });
-  };
   return (
     <div>
       <Header />
       <div className="admin-container">
         <div className="admin-main">WRITE PAGE</div>
         <div className="admin-titletagdate">
-          <input type="text"
+          <input
+            type="text"
             placeholder="TAGS : PROJECT / BLOG"
             value={tagText}
             onChange={tagHandler}
@@ -102,7 +99,8 @@ const Writepage = () => {
           {/* <input type="button" value="적용" onClick={TagClickHandler} /> */}
         </div>
         <div className="admin-titletagdate">
-          <input type="text"
+          <input
+            type="text"
             placeholder="TITLE : [BLOG #1] 블로그 개발하기"
             value={titleText}
             onChange={titleHandler}
@@ -111,7 +109,8 @@ const Writepage = () => {
         </div>
 
         <div className="admin-titletagdate">
-          <input type="text"
+          <input
+            type="text"
             placeholder="DATE : 2023-01-01"
             value={dateText}
             onChange={dateHandler}
@@ -119,7 +118,13 @@ const Writepage = () => {
           {/* <input type="button" value="적용" onClick={DateClickHandler} /> */}
         </div>
         <div className="admin-titletagdate">
-          <input type="file" required multiple id="fileinput" onChange={imgHandler} />
+          <input
+            type="file"
+            required
+            multiple
+            id="fileinput"
+            onChange={imgHandler}
+          />
         </div>
         <div>
           <div className="admin-editor">

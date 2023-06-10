@@ -2,21 +2,24 @@ import "./Homepage.css";
 import Header from "../Header/Header";
 import Button from "../UI/Button";
 import Footer from "../UI/Footer";
-import Pagebutton from "../UI/Pagebutton";
 import Card from "../UI/Card";
 
 import profileimage from "../Assets/IMG_0071 2.jpg";
 import github from "../Assets/Icons/github-icon.png";
 import instagram from "../Assets/Icons/instagram-icon.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Homepage = () => {
-
+  const [changeEvent, setChangeEvent] = useState(false);
   const [postData, setPostData] = useState([]);
 
   const seeTaggedPostHandler = (taggedPostData) => {
     setPostData(taggedPostData);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [changeEvent]);
 
   return (
     <div>
@@ -45,7 +48,6 @@ const Homepage = () => {
       <Button onSeeTaggedPost={seeTaggedPostHandler} />
       {/* <p>Today : 1 &nbsp; / &nbsp; Total : 10</p> */}
       {postData && <Card postdata={postData} />}
-      <Pagebutton />
       <Footer />
     </div>
   );

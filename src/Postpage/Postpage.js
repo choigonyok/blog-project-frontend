@@ -9,19 +9,23 @@ import MDEditor from "@uiw/react-md-editor";
 import { useRef } from "react";
 
 const Postpage = () => {
-  const mounted = useRef(false);
   let { postid } = useParams();
 
+  const [changeEvent, setChangeEvent] = useState(false);
+  const mounted = useRef(false);
   const [postData, setPostData] = useState([]);
   const [relatedPostData, setRelatedPostData] = useState([]);
 
   useEffect(() => {
-    // GET 요청 보내기
+    window.scrollTo(0, 0);
+  }, [changeEvent]);
+
+  useEffect(() => {
     axios
       .get("http://localhost:8080/post/" + JSON.stringify(postid))
       .then((response) => {
-        // 응답 데이터 수신
         setPostData(response.data[0]);
+        setChangeEvent(!changeEvent);
       })
       .catch((error) => {
         console.error(error);
@@ -29,7 +33,6 @@ const Postpage = () => {
   }, [postid]);
 
   useEffect(() => {
-    // POST 요청 보내기
 
     if (!mounted.current) {
       mounted.current = true;
@@ -37,7 +40,6 @@ const Postpage = () => {
       axios
         .post("http://localhost:8080/tag", postData)
         .then((response) => {
-          // 응답 데이터 수신
           const jsonArray = Object.values(response.data);
 
           console.log(jsonArray.filter((post) => String(post.Id) !== postid));
