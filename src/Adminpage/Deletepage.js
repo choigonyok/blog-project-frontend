@@ -115,7 +115,7 @@ const Deletepage = () => {
     <div>
       <Header />
       <div className="delete-container">
-        <div className="delete-main">DELETE/MODIFY PAGE</div>
+        <div className="delete-main">DELETE / MODIFY</div>
         {toModify && (
           <div className="modify-container">
             <div className="admin-titletagdate">

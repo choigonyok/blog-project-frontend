@@ -18,9 +18,9 @@ const Header = () => {
     <div className="header">
       <button className="header-title" onClick={homePageHandler}>_TECHLOG</button>
       <div className="header-empty" />
-      <a href="https://github.com/choigonyok" className="header-category">about</a>
-      <a href="/admin/delete" className="header-category">delete</a>
       <a href="/admin/write" className="header-category">write</a>
+      <a href="/admin/delete" className="header-category">delete/modify</a>
+      <a href="/admin" className="header-category">login</a>
     </div>
   );
 };
