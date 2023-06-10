@@ -2,16 +2,8 @@ input[type="text"]:focus{
   border: 5px solid rgb(255, 42, 0);
   transition: 400ms;
 }
-input[type="text"]:hover{
-  border: 5px solid rgb(255, 42, 0);
-  transition: 400ms;
-}
 
 input[type="password"]:focus{
-  border: 5px solid rgb(255, 42, 0);
-  transition: 400ms;
-}
-input[type="password"]:hover{
   border: 5px solid rgb(255, 42, 0);
   transition: 400ms;
 }
