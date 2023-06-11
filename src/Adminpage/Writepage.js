@@ -156,11 +156,15 @@ const Writepage = () => {
           {/* <input type="button" value="적용" onClick={DateClickHandler} /> */}
         </div>
         <div className="admin-titletagdate">
+          <label for="imgfile">
+            <div class="file-button">IMG UPLOAD</div>
+          </label>
           <input
             type="file"
             required
             multiple
             id="imgfile"
+            name="imgfile"
             className="file-input"
             onChange={imgHandler}
           />
