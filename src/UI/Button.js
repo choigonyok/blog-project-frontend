@@ -6,7 +6,7 @@ const Button = (props) => {
   const [responseData, setResponseData] = useState(null);
   const [title, setTitle] = useState(`" CHOIGONYOK "`);
   const [animate, setAnimate] = useState(true);
-  const [PostData, setPostData] = useState({ tagname: "ALL" });
+  const [PostData, setPostData] = useState({ Tag: "ALL" });
   const [tagsdata, setTagsData] = useState([]);
   const [clicked, setClicked] = useState(false);
 
@@ -60,7 +60,7 @@ const Button = (props) => {
         <input
           type="button"
           className={
-            "ALL" === PostData.tagname ? "tags-button__clicked" : "tags-button"
+            "ALL" === PostData.Tag ? "tags-button__clicked" : "tags-button"
           }
           value="ALL"
           onClick={() => ClickHandler("ALL")}
@@ -69,7 +69,7 @@ const Button = (props) => {
           <input
             type="button"
             className={
-              item.Tagname === PostData.tagname
+              item.Tagname === PostData.Tag
                 ? "tags-button__clicked"
                 : "tags-button"
             }
