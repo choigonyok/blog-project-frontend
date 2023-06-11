@@ -22,8 +22,6 @@ const Postpage = () => {
     axios
       .get("http://localhost:8080/cookie")
       .then((response) => {
-        console.log(response.data.VisitNumber);
-        console.log(response.data.TotalNumber);
       })
       .catch((error) => {
         console.log(error);

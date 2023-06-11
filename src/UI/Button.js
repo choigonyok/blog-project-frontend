@@ -40,7 +40,7 @@ const Button = (props) => {
   }, []);
 
   const ClickHandler = (value) => {
-    setPostData({ tagname: value });
+    setPostData({ Tag: value });
     setTitle(`" ` + value + ` "`);
     setAnimate(!animate);
   };
