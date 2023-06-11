@@ -37,13 +37,14 @@ const Writepage = () => {
         setUnLock(!unlock);
       })
       .catch((error) => {
-        if (HttpStatusCode.Unauthorized) {
-          alert("로그인이 안된 사용자는 게시글 작성 권한이 없습니다!");
+        if (error.response.status === 400) {
+          alert(`쌍따옴표가 입력된 곳이 존재합니다. 수정해주세요.`)
           console.error(error);
-        } else {
-          console.error(error);
-        }
-      });
+        } else if (error.response.status === 401) {
+            console.error(error);
+            alert("로그인이 안된 사용자는 게시글 작성 권한이 없습니다!");
+          }
+        });
   };
 
   const deleteWronglyWrittenPost = () => {
@@ -111,10 +112,9 @@ const Writepage = () => {
           navigate("/");
         })
         .catch((error) => {
-          if (HttpStatusCode.InternalServerError) {
+          if (error.response.status === 500) {
             deleteWronglyWrittenPost();
-            alert("이미지가 등록되지 않을 채로 글이 작성되었습니다!");
-            console.error(error);
+              alert("이미지가 등록되지 않을 채로 글이 작성되었습니다!");
           } else {
             console.error(error);
           }

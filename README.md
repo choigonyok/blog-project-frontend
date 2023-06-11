@@ -782,3 +782,9 @@ https://kimyhcj.tistory.com/263 - 3번 서버사이드에서 처리하기
 프록시는 서버 클라이언트 아키텍처가 많이 이해가 잘 되면 그 때나 한 번 써봐야지
 
 GIT 커밋메시지 내용 수정하려다가 clone했음
+
+
+상태코드별로 에러 처리하고 싶을 때
+api의 오류 catch 블록에서 조건물 실행
+error.response.status === 401
+error.response.status === 400 등

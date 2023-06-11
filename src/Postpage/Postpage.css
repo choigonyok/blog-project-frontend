@@ -107,6 +107,7 @@
   line-height: 215% !important;
   margin: auto;
   text-align: left;
+  justify-content: center;
   width: 700px;
   font-family: 'LeferiPoint-BlackObliqueA' !important;
   margin-bottom: 100px; 
@@ -126,14 +127,13 @@
 
 
 .post-body img {
-  max-width: 700px !important;
+  width: 700px !important;
   max-height: 500px !important;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center !important;
+  align-items: center !important;
   object-fit:scale-down;
   background-color: rgb(24, 26, 28) !important;
-
 }
 
 .post-body h2 {
