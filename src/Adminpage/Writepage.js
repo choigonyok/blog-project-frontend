@@ -16,6 +16,7 @@ const Writepage = () => {
   const [dateText, setDateText] = useState("");
   const [bodyText, setBodyText] = useState("");
   const [img, setIMG] = useState([]);
+  const [imgName, setImgName] = useState([]);
   const [unlock, setUnLock] = useState(false);
   const navigate = useNavigate();
   const mounted = useRef(false);
@@ -37,23 +38,23 @@ const Writepage = () => {
       })
       .catch((error) => {
         if (HttpStatusCode.Unauthorized) {
-          alert("게시글 작성 권한이 없습니다. 로그인을 해주세요!");
+          alert("로그인이 안된 사용자는 게시글 작성 권한이 없습니다!");
           console.error(error);
         } else {
-        console.error(error);
+          console.error(error);
         }
       });
   };
 
   const deleteWronglyWrittenPost = () => {
     axios
-    .delete("http://localhost:8080/post/delete0", {
-      withCredentials: true,
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
+      .delete("http://localhost:8080/post/delete0", {
+        withCredentials: true,
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const titleHandler = (e) => {
     setTitleText(e.target.value);
@@ -68,7 +69,24 @@ const Writepage = () => {
   };
 
   const imgHandler = (e) => {
-    setIMG(e.target.files);
+    setIMG((img) => [...img, ...e.target.files]);
+    // setIMG(e.target.files);
+
+    let f = document.getElementById("imgfile").files;
+    if (f.length !== 0) {
+      for (let i = 0; i < f.length; i++) {
+        setImgName((element) => [...element, f[i].name]);
+      }
+    }
+  };
+
+  const deleteIMGHandler = (value) => {
+    setImgName(
+      imgName.filter((element) => String(element) !== imgName.at(value))
+    );
+    setIMG(
+      img.filter((element) => String(element.name) !== img.at(value).name)
+    );
   };
 
   useEffect(() => {
@@ -95,7 +113,7 @@ const Writepage = () => {
         .catch((error) => {
           if (HttpStatusCode.InternalServerError) {
             deleteWronglyWrittenPost();
-            alert("이미지가 등록되지 않을 채로 글이 작성되었습니다. 글을 삭제하고 다시 작성해주세요.");
+            alert("이미지가 등록되지 않을 채로 글이 작성되었습니다!");
             console.error(error);
           } else {
             console.error(error);
@@ -142,10 +160,22 @@ const Writepage = () => {
             type="file"
             required
             multiple
-            id="fileinput"
+            id="imgfile"
+            className="file-input"
             onChange={imgHandler}
           />
         </div>
+        {imgName.map((item, index) => (
+          <div className="imgname-container">
+            {item}
+            <input
+              type="button"
+              value="X"
+              className="imgname-button"
+              onClick={() => deleteIMGHandler(index)}
+            />
+          </div>
+        ))}
         <div>
           <div className="admin-editor">
             <MDEditor height={865} value={md} onChange={setMD} />

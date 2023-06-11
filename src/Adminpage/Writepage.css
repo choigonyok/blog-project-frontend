@@ -7,6 +7,9 @@ input[type="password"]:focus{
   border: 5px solid rgb(255, 42, 0);
   transition: 400ms;
 }
+.imgname-button:hover{
+  color:rgb(255, 42, 0);
+}
 
 
 input[type="text"]{
@@ -74,12 +77,36 @@ input[type="password"]{
   font-size: 60px;
 }
 .admin-titletagdate {
+  display: flex;
+  flex-direction: column;
   margin: 0.5rem;
   width: 700px;
   font-size: 16px;
   height: auto;
   text-align: center;
+  align-items: center;
+  border:  3px solid white  ;
+  justify-content: center;
   
+}
+input[type="file"]{
+}
+.imgname-container{
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  align-items: center;
+}
+.imgname-button{
+  font-size: 1.2rem;
+  width: auto;
+  text-align: center;
+  background-color: transparent;
+  background-clip: padding-box;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 300ms;
 }
 .sample-container {
   display: flex;

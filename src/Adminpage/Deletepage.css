@@ -9,6 +9,18 @@
   justify-content: center;
   align-items: center;
 }
+.file-container{
+  display: flex;
+  width: 400px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.file{
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
 
 .delete-button:hover{
   background-color: black;

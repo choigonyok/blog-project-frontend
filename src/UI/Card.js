@@ -8,6 +8,7 @@ const Card = (props) => {
     // 버튼 클릭 시 특정 URL로 이동
     navigate("/post/"+postID)
   };
+
   return (
     <div>
       {props.postdata && (

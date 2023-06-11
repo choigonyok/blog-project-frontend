@@ -40,10 +40,10 @@
 
 .header-empty {
   display: flex;
-  width: 70%;
+  width: 60%;
 }
 .header-title {
-  font-size: 17px;
+  font-size: 18px;
   text-decoration: none;
   text-align: left;
   width: auto;
@@ -55,9 +55,8 @@
 }
 .header-category {
   margin-left: 2rem;
-
   text-align: right;
-  font-size: 15px;
+  font-size: 16px;
   text-decoration: none;
   width: auto;
   transition: 300ms;

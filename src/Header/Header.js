@@ -19,7 +19,7 @@ const Header = () => {
       <button className="header-title" onClick={homePageHandler}>_TECHLOG</button>
       <div className="header-empty" />
       <a href="/admin/write" className="header-category">write</a>
-      <a href="/admin/delete" className="header-category">delete/modify</a>
+      <a href="/admin/delete" className="header-category">delete / modify</a>
       <a href="/admin" className="header-category">login</a>
     </div>
   );

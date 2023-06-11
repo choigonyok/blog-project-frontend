@@ -15,7 +15,6 @@ const Deletepage = () => {
   const [dateText, setDateText] = useState("");
   const [bodyText, setBodyText] = useState("");
   const [id, setID] = useState();
-  // const [img, setIMG] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [toModify, setToModify] = useState(false);
   const [allPost, setAllPost] = useState(false);
@@ -40,13 +39,13 @@ const Deletepage = () => {
       })
       .catch((error) => {
         console.error(error);
-        alert("게시글 수정 권한이 없습니다. 로그인을 해주세요!");
+        alert("로그인이 안된 사용자는 게시글 수정 권한이 없습니다!");
       });
   };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/post/all", {})
+      .get("http://localhost:8080/post/all")
       .then((response) => {
         setAllPost(response.data);
       })
@@ -74,7 +73,7 @@ const Deletepage = () => {
       })
       .catch((error) => {
         console.error(error);
-        alert("게시글 삭제 권한이 없습니다. 로그인을 해주세요!");
+        alert("로그인이 안된 사용자는 게시글 삭제 권한이 없습니다!");
       });
   };
 
@@ -107,10 +106,6 @@ const Deletepage = () => {
     setDateText(e.target.value);
   };
 
-  // const imgHandler = (e) => {
-  //   setIMG(e.target.files);
-  // };
-
   return (
     <div>
       <Header />
@@ -127,15 +122,6 @@ const Deletepage = () => {
             <div className="admin-titletagdate">
               <input type="text" value={dateText} onChange={dateHandler} />
             </div>
-            {/* <div className="admin-titletagdate">
-              <input
-                type="file"
-                required
-                multiple
-                id="fileinput"
-                onChange={imgHandler}
-              />
-            </div> */}
             <div>
               <div className="admin-editor">
                 <MDEditor height={400} value={md} onChange={setMD} />

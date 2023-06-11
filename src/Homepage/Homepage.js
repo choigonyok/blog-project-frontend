@@ -33,6 +33,7 @@ const Homepage = () => {
 
   const seeTaggedPostHandler = (taggedPostData) => {
     setPostData(taggedPostData);
+    
   };
 
   useEffect(() => {
@@ -68,8 +69,8 @@ const Homepage = () => {
       </div>
       <Button onSeeTaggedPost={seeTaggedPostHandler} />
       {/* <p>Today : 1 &nbsp; / &nbsp; Total : 10</p> */}
-      {postData && <Card postdata={postData} />}
-      <Footer />
+      {postData && <Card postdata={postData}/>}
+      <Footer/>
     </div>
   );
 };
