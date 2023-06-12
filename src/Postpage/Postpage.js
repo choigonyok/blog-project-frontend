@@ -18,11 +18,10 @@ const Postpage = () => {
   const mounted = useRef(false);
   const [postData, setPostData] = useState({});
   const [relatedPostData, setRelatedPostData] = useState([]);
-  const [com, setCom] = useState([]);
-
-  console.log(com);
-  console.log(com);
-  console.log(com);
+  const [comData, setComData] = useState([]);
+  const [comText, setComText] = useState([]);
+  const [comID, setComID] = useState([]);
+  const [comPW, setComPW] = useState([]);
 
   useEffect(() => {
     axios
@@ -42,7 +41,9 @@ const Postpage = () => {
       .get("http://localhost:8080/post/" + JSON.stringify(postid))
       .then((response) => {
         setPostData(response.data);
-        setCom(response.data.Comments);
+        setComText(response.data.Comments);
+        setComPW(response.data.WriterPW);
+        setComID(response.data.WriterID);
         setChangeEvent(!changeEvent);
       })
       .catch((error) => {
@@ -69,10 +70,12 @@ const Postpage = () => {
         });
     }
   }, [postData]);
-  
-  const CommentChangeHandler =(value)=>{
-    setCom([...com, value]);
-  }
+
+  const CommentChangeHandler = (value) => {
+    comText ? setComText([...comText, value.comments]) : setComText([value.comments])
+    comText ? setComPW([...comText, value.compw]) : setComPW([value.compw])
+    comText ? setComID([...comText, value.comid]) : setComID([value.comid])
+  };
 
   return (
     <div>
@@ -96,10 +99,18 @@ const Postpage = () => {
           <MDEditor.Markdown className="post-body" source={postData.Body} />
         </div>
       </div>
-
-      {com && com.map((item, index) => (
-        <div>{item}</div>
-      ))}
+      <div className="related-post__container">
+        <p className="related-post__content">- COMMENTS -</p>
+      </div>
+      <div className="comment-container">
+        {comID &&
+          comID.map((item, index) => (
+            <div>
+              <div className="comment-box__writer">{item}</div>
+              <div className="comment-box">{comText[index]}</div>
+            </div>
+          ))}
+      </div>
       <Comment id={postid} onChangeComment={CommentChangeHandler} />
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
