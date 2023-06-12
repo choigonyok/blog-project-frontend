@@ -86,12 +86,15 @@ const Deletepage = () => {
     axios
       .get("http://localhost:8080/post/" + value)
       .then((response) => {
+        console.log(response.data);
+        console.log(response.data);
+        console.log(response.data);
         setToModify(true);
         setID(value);
-        setTitleText(response.data[0].Title);
-        setTagText(response.data[0].Tag);
-        setDateText(response.data[0].Datetime);
-        setMD(response.data[0].Body);
+        setTitleText(response.data.Title);
+        setTagText(response.data.Tag);
+        setDateText(response.data.Datetime);
+        setMD(response.data.Body);
         setChangeEvent(!changeEvent);
       })
       .catch((error) => {

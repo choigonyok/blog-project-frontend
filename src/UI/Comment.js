@@ -42,26 +42,30 @@ const Comment = (props) => {
     }
   };
   const commentSendHandler = () => {
-    axios
-      .put("http://localhost:8080/comments", comData)
-      .then((response) => {
-        console.log(comData);
-        console.log(comData);
-        console.log(comData);
-        props.onChangeComment(comData);
-        setNowComment("");
-        setNowID("");
-        setNowPW("");
-      })
-      .catch((error) => {
-        // if (error.response.status === 500) {
-        //   console.log(error);
-        //   alert("서버에 문제가 생겨 현재 댓글을 작성할 수 없습니다.");
-        // } else {
-        //   console.log(error);
-        // }
-        console.log(error);
-      });
+    if (comData.comid ==="" || comData.comments ===""|| comData.compw ==="") {
+      alert("작성되지 않은 항목이 존재합니다.");
+    } else {
+      axios
+        .put("http://localhost:8080/comments", comData)
+        .then((response) => {
+          console.log(comData);
+          console.log(comData);
+          console.log(comData);
+          props.onChangeComment(comData);
+          setNowComment("");
+          setNowID("");
+          setNowPW("");
+        })
+        .catch((error) => {
+          // if (error.response.status === 500) {
+          //   console.log(error);
+          //   alert("서버에 문제가 생겨 현재 댓글을 작성할 수 없습니다.");
+          // } else {
+          //   console.log(error);
+          // }
+          console.log(error);
+        });
+    }
   };
 
   return (
@@ -69,7 +73,7 @@ const Comment = (props) => {
       <div className="comment-container__write">
         <textarea
           className="comment"
-          placeholder="댓글을 작성해주세요 !"
+          placeholder="PLEASE LEAVE A COMMENT ! (MAX 500 LETTERS)"
           onChange={commentHandler}
           value={nowComment}
         />
@@ -89,7 +93,7 @@ const Comment = (props) => {
           <input
             type="button"
             className="comment-button__submit"
-            value="댓글 남기기"
+            value="POST"
             onClick={commentSendHandler}
           />
         </div>
