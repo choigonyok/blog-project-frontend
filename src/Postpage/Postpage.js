@@ -59,8 +59,6 @@ const Postpage = () => {
         .post("http://localhost:8080/tag", postData)
         .then((response) => {
           const jsonArray = Object.values(response.data);
-
-          console.log(jsonArray.filter((post) => String(post.Id) !== postid));
           setRelatedPostData(
             jsonArray.filter((post) => String(post.Id) !== postid)
           );
@@ -73,8 +71,8 @@ const Postpage = () => {
 
   const CommentChangeHandler = (value) => {
     comText ? setComText([...comText, value.comments]) : setComText([value.comments])
-    comText ? setComPW([...comText, value.compw]) : setComPW([value.compw])
-    comText ? setComID([...comText, value.comid]) : setComID([value.comid])
+    comText ? setComPW([...comPW, value.compw]) : setComPW([value.compw])
+    comText ? setComID([...comID, value.comid]) : setComID([value.comid])
   };
 
   return (

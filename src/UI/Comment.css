@@ -31,27 +31,26 @@
   text-align: center;
   padding-bottom: 5%;
   width: 900px !important;
-  
 }
-.comment-buttons{
-        display: flex;
-        width: 700px;
-        gap: 0.5rem;
+.comment-buttons {
+  display: flex;
+  width: 700px;
+  gap: 0.5rem;
 }
-.comment-button__id{
-        display: flex;
-        width: auto;
-        font-size: 14px;
-        padding-left: 4% !important;
-        padding-right: 4%;
-        padding-top: 1.5%;
-        padding-bottom: 1.5%;
-        border: 5px solid rgb(38, 46, 59);
-        background-color: rgb(59, 59, 59);
-        background-clip: padding-box;
-        color: white;
-        border-radius: 30px;
-        transition: 300ms;
+.comment-button__id {
+  display: flex;
+  width: auto;
+  font-size: 14px;
+  padding-left: 4% !important;
+  padding-right: 4%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  background-clip: padding-box;
+  color: white;
+  border-radius: 30px;
+  transition: 300ms;
 }
 
 .comment-button__submit {
@@ -85,4 +84,5 @@
   min-height: 150px;
   outline: none;
   transition: 400ms;
+  resize: none;
 }
