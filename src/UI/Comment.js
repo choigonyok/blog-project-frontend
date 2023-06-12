@@ -57,13 +57,14 @@ const Comment = (props) => {
           setNowPW("");
         })
         .catch((error) => {
-          // if (error.response.status === 500) {
-          //   console.log(error);
-          //   alert("서버에 문제가 생겨 현재 댓글을 작성할 수 없습니다.");
-          // } else {
-          //   console.log(error);
-          // }
+          if (error.response.status === 500) {
+            console.log(error);
+            alert("서버에 문제가 생겨 현재 댓글을 작성할 수 없습니다.");
+          } else if (error.response.status === 400) {
+            alert("특수문자 ' 은 입력하실 수 없습니다.");
+          } else {
           console.log(error);
+          }
         });
     }
   };

@@ -38,7 +38,7 @@ const Writepage = () => {
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          alert(`쌍따옴표가 입력된 곳이 존재합니다. 수정해주세요.`)
+          alert(`특수문자 ' 가 입력된 곳이 존재합니다. 수정해주세요.`)
           console.error(error);
         } else if (error.response.status === 401) {
             console.error(error);

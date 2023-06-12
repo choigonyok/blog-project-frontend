@@ -39,7 +39,7 @@ const Deletepage = () => {
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          alert(`쌍따옴표가 입력된 곳이 존재합니다. 수정해주세요.`)
+          alert(`특수문자 ' 가 입력된 곳이 존재합니다. 수정해주세요.`)
         } else if (error.response.status === 401){
           alert("로그인이 안된 사용자는 게시글 수정 권한이 없습니다!");
         } else {
