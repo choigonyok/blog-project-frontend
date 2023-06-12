@@ -1,0 +1,70 @@
+.comment:focus {
+  border: 5px solid rgb(255, 42, 0);
+  color: white;
+  transition: 300ms;
+}
+.comment-container__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.comment-button:hover {
+  border: 5px solid rgb(255, 42, 0);
+  color: black;
+  transition: 300ms;
+  background-color: white;
+}
+
+.comment-container {
+  display: flex;
+
+  flex-direction: column;
+  margin-top: 3%;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 5%;
+  width: 900px;
+  border-top: 3px solid white;
+}
+
+.comment-button {
+  display: flex;
+  border: 5px solid white;
+  width: auto;
+
+  font-size: 14px;
+  padding-left: 4%;
+  padding-right: 4%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  background-clip: padding-box;
+  color: white;
+  border-radius: 30px;
+  transition: 300ms;
+}
+
+.comment {
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+  text-align: left;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  color: white;
+  padding: 1.5%;
+  padding-left: 2%;
+  border-radius: 30px;
+  font-size: 17px;
+  min-height: 150px;
+  outline: none;
+  transition: 400ms;
+}

@@ -7,26 +7,31 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import { useRef } from "react";
+import Comment from "../UI/Comment";
 
 const Postpage = () => {
   axios.defaults.withCredentials = true;
-  
+
   let { postid } = useParams();
 
   const [changeEvent, setChangeEvent] = useState(false);
   const mounted = useRef(false);
-  const [postData, setPostData] = useState([]);
+  const [postData, setPostData] = useState({});
   const [relatedPostData, setRelatedPostData] = useState([]);
+  const [com, setCom] = useState([]);
+
+  console.log(com);
+  console.log(com);
+  console.log(com);
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/cookie")
-      .then((response) => {
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });
-  },[]);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,7 +41,8 @@ const Postpage = () => {
     axios
       .get("http://localhost:8080/post/" + JSON.stringify(postid))
       .then((response) => {
-        setPostData(response.data[0]);
+        setPostData(response.data);
+        setCom(response.data.Comments);
         setChangeEvent(!changeEvent);
       })
       .catch((error) => {
@@ -45,7 +51,6 @@ const Postpage = () => {
   }, [postid]);
 
   useEffect(() => {
-
     if (!mounted.current) {
       mounted.current = true;
     } else {
@@ -64,6 +69,10 @@ const Postpage = () => {
         });
     }
   }, [postData]);
+  
+  const CommentChangeHandler =(value)=>{
+    setCom([...com, value]);
+  }
 
   return (
     <div>
@@ -87,6 +96,11 @@ const Postpage = () => {
           <MDEditor.Markdown className="post-body" source={postData.Body} />
         </div>
       </div>
+
+      {com && com.map((item, index) => (
+        <div>{item}</div>
+      ))}
+      <Comment id={postid} onChangeComment={CommentChangeHandler} />
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>
