@@ -122,6 +122,22 @@ const Deletepage = () => {
     setPostRequest(!postRequest);
   };
 
+  const CommentDeleteHandler = (value) => {
+    axios
+      .delete("http://localhost:8080/post/comments/" + value)
+      .then((response) => {
+        setPostRequest(!postRequest);
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          console.log(error);
+          alert("로그인이 안된 사용자는 댓글 삭제 권한이 없습니다!");
+        } else {
+          console.log(error);
+        }
+      });
+  };
+
   const isPostsHandler = () => {
     setIsComments(false);
     setIsPosts(true);
@@ -230,20 +246,17 @@ const Deletepage = () => {
               comInfo.map((item, index) => (
                 <div className="delete-inlist">
                   <div className="delete-post">
-                    <h2 className="delete-date">{item.comid}</h2>
-                    <h2 className="delete-title">{item.compw}</h2>
-                    <h2 className="delete-tag">{item.comments}</h2>
+                    <h2 className="delete-title">{item.comments}</h2>
+                    <h2 className="delete-tag">{item.comid}</h2>
                   </div>
                   <div className="delete-button__container">
                     <input
                       className="delete-button"
                       type="button"
                       value="삭제"
-                    />
-                    <input
-                      className="delete-button"
-                      type="button"
-                      value="수정"
+                      onClick={() => {
+                        CommentDeleteHandler(item.uniqueid);
+                      }}
                     />
                   </div>
                 </div>
