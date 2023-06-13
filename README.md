@@ -788,3 +788,5 @@ GIT 커밋메시지 내용 수정하려다가 clone했음
 api의 오류 catch 블록에서 조건물 실행
 error.response.status === 401
 error.response.status === 400 등
+
+롤백 깃 푸시 테스트
