@@ -19,6 +19,11 @@ const Deletepage = () => {
   const [toModify, setToModify] = useState(false);
   const [allPost, setAllPost] = useState(false);
   const [postData, setPostData] = useState([]);
+  const [isPosts, setIsPosts] = useState(false);
+  const [isComments, setIsComments] = useState(false);
+  const [comInfo, setComInfo] = useState([]);
+  const [postRequest, setPostRequest] = useState(false);
+
 
   const postHandler = () => {
     const postdata = {
@@ -39,8 +44,8 @@ const Deletepage = () => {
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          alert(`특수문자 ' 가 입력된 곳이 존재합니다. 수정해주세요.`)
-        } else if (error.response.status === 401){
+          alert(`특수문자 ' 가 입력된 곳이 존재합니다. 수정해주세요.`);
+        } else if (error.response.status === 401) {
           alert("로그인이 안된 사용자는 게시글 수정 권한이 없습니다!");
         } else {
           console.log(error);
@@ -86,9 +91,6 @@ const Deletepage = () => {
     axios
       .get("http://localhost:8080/post/" + value)
       .then((response) => {
-        console.log(response.data);
-        console.log(response.data);
-        console.log(response.data);
         setToModify(true);
         setID(value);
         setTitleText(response.data.Title);
@@ -114,70 +116,140 @@ const Deletepage = () => {
     setDateText(e.target.value);
   };
 
+  const isCommentsHandler = () => {
+    setIsComments(true);
+    setIsPosts(false);
+    setPostRequest(!postRequest);
+  };
+
+  const isPostsHandler = () => {
+    setIsComments(false);
+    setIsPosts(true);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/post/comments/0")
+      .then((response) => {
+        setComInfo([...response.data]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [postRequest]);
+
   return (
     <div>
       <Header />
       <div className="delete-container">
         <div className="delete-main">DELETE / MODIFY</div>
-        {toModify && (
-          <div className="modify-container">
-            <div className="admin-titletagdate">
-              <input type="text" value={tagText} onChange={tagHandler} />
-            </div>
-            <div className="admin-titletagdate">
-              <input type="text" value={titleText} onChange={titleHandler} />
-            </div>
-            <div className="admin-titletagdate">
-              <input type="text" value={dateText} onChange={dateHandler} />
-            </div>
-            <div>
-              <div className="admin-editor">
-                <MDEditor height={400} value={md} onChange={setMD} />
+        <div className="select-container">
+          <input
+            type="button"
+            className="select-button"
+            value="POSTS"
+            onClick={isPostsHandler}
+          />
+          <input
+            type="button"
+            className="select-button"
+            value="COMMENTS"
+            onClick={isCommentsHandler}
+          />
+        </div>
+        {isPosts && (
+          <div>
+            {toModify && (
+              <div className="modify-container">
+                <div className="admin-titletagdate">
+                  <input type="text" value={tagText} onChange={tagHandler} />
+                </div>
+                <div className="admin-titletagdate">
+                  <input
+                    type="text"
+                    value={titleText}
+                    onChange={titleHandler}
+                  />
+                </div>
+                <div className="admin-titletagdate">
+                  <input type="text" value={dateText} onChange={dateHandler} />
+                </div>
+                <div>
+                  <div className="admin-editor">
+                    <MDEditor height={400} value={md} onChange={setMD} />
+                  </div>
+                </div>
+                <div className="button-container">
+                  <input
+                    type="button"
+                    className="admin-button"
+                    value="이 내용으로 수정하기"
+                    onClick={postHandler}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="button-container">
-              <input
-                type="button"
-                className="admin-button"
-                value="이 내용으로 수정하기"
-                onClick={postHandler}
-              />
+            )}
+            <div className="delete-list">
+              {allPost && (
+                <div>
+                  {allPost.map((item, index) => (
+                    <div className="delete-inlist">
+                      <div className="delete-post">
+                        <h2 className="delete-date">{item.Datetime}</h2>
+                        <h2 className="delete-title">{item.Title}</h2>
+                        <h2 className="delete-tag">{item.Tag}</h2>
+                      </div>
+                      <div className="delete-button__container">
+                        <input
+                          className="delete-button"
+                          type="button"
+                          value="삭제"
+                          onClick={() => {
+                            deleteHandler(item.Id);
+                          }}
+                        />
+                        <input
+                          className="delete-button"
+                          type="button"
+                          value="수정"
+                          onClick={() => {
+                            modifyHandler(item.Id);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
-        <div className="delete-list">
-          {allPost && (
-            <div>
-              {allPost.map((item, index) => (
+        {isComments && (
+          <div className="delete-list">
+            {comInfo &&
+              comInfo.map((item, index) => (
                 <div className="delete-inlist">
                   <div className="delete-post">
-                    <h2 className="delete-date">{item.Datetime}</h2>
-                    <h2 className="delete-title">{item.Title}</h2>
-                    <h2 className="delete-tag">{item.Tag}</h2>
+                    <h2 className="delete-date">{item.comid}</h2>
+                    <h2 className="delete-title">{item.compw}</h2>
+                    <h2 className="delete-tag">{item.comments}</h2>
                   </div>
                   <div className="delete-button__container">
                     <input
                       className="delete-button"
                       type="button"
                       value="삭제"
-                      onClick={() => {
-                        deleteHandler(item.Id);
-                      }}
                     />
                     <input
                       className="delete-button"
                       type="button"
                       value="수정"
-                      onClick={() => {
-                        modifyHandler(item.Id);
-                      }}
                     />
                   </div>
                 </div>
               ))}
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <Footer />

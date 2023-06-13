@@ -1,3 +1,10 @@
+.select-button:hover{
+  background-color: black;
+  border: 5px solid rgb(255, 42, 0);
+  color: white;
+  transition: 300ms;
+}
+
 .delete-container {
   display: flex;
   flex-direction: column;
@@ -9,20 +16,20 @@
   justify-content: center;
   align-items: center;
 }
-.file-container{
+.file-container {
   display: flex;
   width: 400px;
   justify-content: center;
   text-align: center;
   align-items: center;
 }
-.file{
+.file {
   justify-content: center;
   text-align: center;
   align-items: center;
 }
 
-.delete-button:hover{
+.delete-button:hover {
   background-color: black;
   border: 5px solid rgb(255, 42, 0);
   color: white;
@@ -42,12 +49,12 @@
   padding-top: 3%;
   padding-bottom: 3%;
   border-radius: 50px;
-        background-color: rgb(37, 37, 37);
+  background-color: rgb(37, 37, 37);
 }
 .delete-inlist {
   display: flex;
   flex-direction: row;
-  align-items: center;  
+  align-items: center;
   height: auto;
 }
 .delete-button {
@@ -64,15 +71,15 @@
   transition: 500ms;
 }
 .delete-button__container {
-        display: flex;
-        flex-direction: column;
-        width: 80px;
-        border-radius: 20px;
-        gap: 3rem;
-        height: auto;
-        justify-content: center;
-        align-items: center;
-      }
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  border-radius: 20px;
+  gap: 3rem;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
 .delete-post {
   display: flex;
   flex-direction: column;
@@ -124,4 +131,31 @@
   align-items: center;
   gap: 10px;
   justify-content: center;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  margin-top: 3%;
+}
+
+.select-button {
+  font-size: 20px;
+  width: 20rem;
+  height: auto;
+  padding-left: 3%;
+  padding-right: 3%;
+  justify-content: center;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  border: 5px solid rgb(38, 46, 59);
+  background-color: rgb(59, 59, 59);
+  background-clip: padding-box;
+  color: white;
+  border-radius: 30px;
+  transition: 300ms;
 }
