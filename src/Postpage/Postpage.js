@@ -18,10 +18,7 @@ const Postpage = () => {
   const mounted = useRef(false);
   const [postData, setPostData] = useState({});
   const [relatedPostData, setRelatedPostData] = useState([]);
-  const [comData, setComData] = useState([]);
-  const [comText, setComText] = useState([]);
-  const [comID, setComID] = useState([]);
-  const [comPW, setComPW] = useState([]);
+
 
   useEffect(() => {
     axios
@@ -40,10 +37,7 @@ const Postpage = () => {
     axios
       .get("http://localhost:8080/post/" + JSON.stringify(postid))
       .then((response) => {
-        setPostData(response.data);
-        setComText(response.data.Comments);
-        setComPW(response.data.WriterPW);
-        setComID(response.data.WriterID);
+        setPostData(response.data); 
         setChangeEvent(!changeEvent);
       })
       .catch((error) => {
@@ -68,12 +62,6 @@ const Postpage = () => {
         });
     }
   }, [postData]);
-
-  const CommentChangeHandler = (value) => {
-    comText ? setComText([...comText, value.comments]) : setComText([value.comments])
-    comText ? setComPW([...comPW, value.compw]) : setComPW([value.compw])
-    comText ? setComID([...comID, value.comid]) : setComID([value.comid])
-  };
 
   return (
     <div>
@@ -100,16 +88,7 @@ const Postpage = () => {
       <div className="related-post__container">
         <p className="related-post__content">- COMMENTS -</p>
       </div>
-      <div className="comment-container">
-        {comID &&
-          comID.map((item, index) => (
-            <div>
-              <div className="comment-box__writer">{item}</div>
-              <div className="comment-box">{comText[index]}</div>
-            </div>
-          ))}
-      </div>
-      <Comment id={postid} onChangeComment={CommentChangeHandler} />
+      <Comment id={postid} />
       <div className="related-post__container">
         <p className="related-post__content">- RELATED POSTS -</p>
       </div>

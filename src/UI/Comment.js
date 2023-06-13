@@ -8,6 +8,7 @@ const Comment = (props) => {
   const [nowPW, setNowPW] = useState("");
   const [comData, setComData] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
+  const [comInfo, setComInfo] = useState([]);
 
   useEffect(() => {
     setComData({
@@ -42,7 +43,11 @@ const Comment = (props) => {
     }
   };
   const commentSendHandler = () => {
-    if (comData.comid ==="" || comData.comments ===""|| comData.compw ==="") {
+    if (
+      comData.comid === "" ||
+      comData.comments === "" ||
+      comData.compw === ""
+    ) {
       alert("작성되지 않은 항목이 존재합니다.");
     } else {
       axios
@@ -51,10 +56,10 @@ const Comment = (props) => {
           console.log(comData);
           console.log(comData);
           console.log(comData);
-          props.onChangeComment(comData);
           setNowComment("");
           setNowID("");
           setNowPW("");
+          setIsFinished(!isFinished);
         })
         .catch((error) => {
           if (error.response.status === 500) {
@@ -63,40 +68,63 @@ const Comment = (props) => {
           } else if (error.response.status === 400) {
             alert("특수문자 ' 은 입력하실 수 없습니다.");
           } else {
-          console.log(error);
+            console.log(error);
           }
         });
     }
   };
 
+  // post id로 해당 post의 comments get
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/post/comments/"+props.id)
+      .then((response) => {
+        setComInfo([...response.data]);
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+  },[isFinished]);
+
   return (
-    <div className="comment-container__container">
-      <div className="comment-container__write">
-        <textarea
-          className="comment"
-          placeholder="PLEASE LEAVE A COMMENT ! (MAX 500 LETTERS)"
-          onChange={commentHandler}
-          value={nowComment}
-        />
-        <div className="comment-buttons">
-          <input
-            type="text"
-            placeholder="NICKNAME"
-            onChange={commentIDHandler}
-            value={nowID}
+    <div>
+      <div className="comment-container">
+        {comInfo &&
+          comInfo.map((item, index) => (
+            <div>
+              <div className= {item.isadmin===1 ? "comment-box__adminwriter" : "comment-box__writer"}>{item.comid}</div>
+              <div className="comment-box">{item.comments}</div>
+            </div>
+          ))}
+      </div>
+      <div className="comment-container__container">
+        <div className="comment-container__write">
+          <textarea
+            className="comment"
+            placeholder="PLEASE LEAVE A COMMENT ! (MAX 500 LETTERS)"
+            onChange={commentHandler}
+            value={nowComment}
           />
-          <input
-            type="password"
-            placeholder="PASSWORD"
-            onChange={commentPWHandler}
-            value={nowPW}
-          />
-          <input
-            type="button"
-            className="comment-button__submit"
-            value="POST"
-            onClick={commentSendHandler}
-          />
+          <div className="comment-buttons">
+            <input
+              type="text"
+              placeholder="NICKNAME"
+              onChange={commentIDHandler}
+              value={nowID}
+            />
+            <input
+              type="password"
+              placeholder="PASSWORD"
+              onChange={commentPWHandler}
+              value={nowPW}
+            />
+            <input
+              type="button"
+              className="comment-button__submit"
+              value="POST"
+              onClick={commentSendHandler}
+            />
+          </div>
         </div>
       </div>
     </div>
