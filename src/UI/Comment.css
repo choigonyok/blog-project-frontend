@@ -125,6 +125,7 @@
   border-left: 1px solid rgb(185, 185, 185);
   color: rgb(185, 185, 185);
   padding: 0.5rem;
+  padding-left: 1rem;
 }
 
 .comment-box__adminwriter {

@@ -129,9 +129,9 @@ const Deletepage = () => {
         setPostRequest(!postRequest);
       })
       .catch((error) => {
-        if (error.response.status === 400) {
+        if (error.response.status === 401) {
           console.log(error);
-          alert("로그인이 안된 사용자는 댓글 삭제 권한이 없습니다!");
+            alert("로그인이 안된 사용자는 댓글 삭제 권한이 없습니다!");
         } else {
           console.log(error);
         }
