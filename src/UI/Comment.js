@@ -9,6 +9,9 @@ const Comment = (props) => {
   const [comData, setComData] = useState([]);
   const [isFinished, setIsFinished] = useState(false);
   const [comInfo, setComInfo] = useState([]);
+  const [passwordComment, setPasswordComment] = useState(0);
+  const [deletePW, setDeletePW] = useState("");
+  
 
   useEffect(() => {
     setComData({
@@ -77,14 +80,44 @@ const Comment = (props) => {
   // post id로 해당 post의 comments get
   useEffect(() => {
     axios
-      .get("http://localhost:8080/post/comments/"+props.id)
+      .get("http://localhost:8080/post/comments/" + props.id)
       .then((response) => {
         setComInfo([...response.data]);
       })
+
       .catch((error) => {
-          console.log(error);
+        console.log(error);
       });
-  },[isFinished]);
+  }, [isFinished]);
+
+  const showPasswordInput = (value) => {
+    setPasswordComment(value);
+  };
+
+  const CheckPasswordHandler = (value) => {
+    if (value.compw === deletePW) {
+      alert("RIGHT");
+    } else {
+      alert("WRONG");
+    }
+    //보안상 헤더에 토큰 넣어서 보내야함
+    axios
+      .delete("http://localhost:8080/post/comments/"+value.uniqueid)
+      .then((response)=>{
+        setIsFinished(!isFinished);
+      })
+      .catch((error)=>{
+      })
+  };
+
+  const DeletePasswordHandler = (e) => {
+    if (e.target.value.length <= 8) {
+      setDeletePW(e.target.value);
+    } else {
+      alert("PASSWORD 최대 길이 제한은 8자입니다!");
+    }
+  }
+  
 
   return (
     <div>
@@ -92,8 +125,27 @@ const Comment = (props) => {
         {comInfo &&
           comInfo.map((item, index) => (
             <div>
-              <div className= {item.isadmin===1 ? "comment-box__adminwriter" : "comment-box__writer"}>{item.comid}</div>
-              <div className="comment-box">{item.comments}</div>
+              <div
+                className={
+                  item.isadmin === 1
+                    ? "comment-box__adminwriter"
+                    : "comment-box__writer"
+                }
+              >
+                {item.comid}
+              </div>
+              <div className="comment-box">
+                <div className="comment-delete">{item.comments}</div>
+                <div className="comment-delete__button">
+                  <h4 onClick={() => showPasswordInput(item.uniqueid)}>X</h4>
+                </div>
+              </div>
+              {passwordComment === item.uniqueid ? 
+              <div className="password-container">
+                <input type="password" placeholder="PASSWORD" className="password-text" onChange={DeletePasswordHandler}/>
+                <input type="button" value="DELETE" className="comment-button__submit" onClick={()=>CheckPasswordHandler(item)}/>
+              </div>
+               : ""}
             </div>
           ))}
       </div>

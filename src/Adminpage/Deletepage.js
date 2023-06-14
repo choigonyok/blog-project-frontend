@@ -1,7 +1,7 @@
 import Header from "../Header/Header";
 import "./Deletepage.css";
 import Footer from "../UI/Footer";
-import axios, { HttpStatusCode, all } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import MDEditor from "@uiw/react-md-editor";
 
@@ -246,7 +246,7 @@ const Deletepage = () => {
               comInfo.map((item, index) => (
                 <div className="delete-inlist">
                   <div className="delete-post">
-                    <h2 className="delete-title">{item.comments}</h2>
+                    <h2 className="delete-comment">{item.comments}</h2>
                     <h2 className="delete-tag">{item.comid}</h2>
                   </div>
                   <div className="delete-button__container">

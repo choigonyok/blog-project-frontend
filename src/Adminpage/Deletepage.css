@@ -35,6 +35,7 @@
   color: white;
   transition: 300ms;
 }
+
 .delete-main {
   text-align: center;
   font-size: 60px;
@@ -98,6 +99,13 @@
   gap: 5px;
 }
 .delete-title {
+  display: flex;
+  font-size: 24px;
+  height: auto;
+  padding: 0.5rem;
+  text-align: center;
+}
+.delete-comment {
   display: flex;
   font-size: 24px;
   height: auto;
