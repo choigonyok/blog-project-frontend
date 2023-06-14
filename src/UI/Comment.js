@@ -20,6 +20,7 @@ const Comment = (props) => {
     setIsFinished(!isFinished);
   };
 
+  // 댓글용
   useEffect(() => {
     setComData({
       postid: props.id,
@@ -142,13 +143,35 @@ const Comment = (props) => {
       setPasswordComment(0);
       setReply(value.uniqueid);
     }
-
-    console.log(
-      "postid: props.id,comments: nowComment,comid: nowID,compw: nowPW,"
-    );
   };
 
-  
+  const replySendHandler = (value) => {
+    // item.uniqueid으로 대댓글 만들기
+    if (
+      comData.comid === "" ||
+      comData.comments === "" ||
+      comData.compw === ""
+    ) {
+      alert("작성되지 않은 항목이 존재합니다.");
+    } else {
+      axios
+        .put("http://localhost:8080/reply/"+value ,comData)
+        .then((response) => {
+          resetReply();
+          setReply(0);
+        })
+        .catch((error) => {
+          if (error.response.status === 500) {
+            console.log(error);
+            alert("서버에 문제가 생겨 현재 대댓글을 작성할 수 없습니다.");
+          } else if (error.response.status === 400) {
+            alert("특수문자 ' 은 입력하실 수 없습니다.");
+          } else {
+            console.log(error);
+          }
+        });
+    }
+  };
 
   return (
     <div>
@@ -219,7 +242,7 @@ const Comment = (props) => {
                         type="button"
                         className="comment-button__submit"
                         value="POST"
-                        
+                        onClick={() => replySendHandler(item.uniqueid)}
                       />
                     </div>
                   </div>
