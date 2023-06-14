@@ -11,7 +11,6 @@ const Comment = (props) => {
   const [comInfo, setComInfo] = useState([]);
   const [passwordComment, setPasswordComment] = useState(0);
   const [deletePW, setDeletePW] = useState("");
-  
 
   useEffect(() => {
     setComData({
@@ -95,19 +94,22 @@ const Comment = (props) => {
   };
 
   const CheckPasswordHandler = (value) => {
-    if (value.compw === deletePW) {
-      alert("RIGHT");
-    } else {
-      alert("WRONG");
-    }
-    //보안상 헤더에 토큰 넣어서 보내야함
     axios
-      .delete("http://localhost:8080/post/comments/"+value.uniqueid)
+      .post("http://localhost:8080/post/comments?comid="+value.uniqueid+"&inputpw="+deletePW)
       .then((response)=>{
+        alert("댓글이 삭제되었습니다.");
+        setPasswordComment(0);
         setIsFinished(!isFinished);
       })
       .catch((error)=>{
-      })
+        if (error.response.status === 400) {
+          console.log(error);
+          alert("PASSWORD가 틀렸습니다.");
+        } else {
+          console.log(error);
+          alert(error);
+        }
+      })                  
   };
 
   const DeletePasswordHandler = (e) => {
