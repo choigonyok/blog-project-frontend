@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Comment.css";
 import axios from "axios";
+import Reply from "./Reply";
 
 const Comment = (props) => {
   const [nowComment, setNowComment] = useState("");
@@ -155,7 +156,7 @@ const Comment = (props) => {
       alert("작성되지 않은 항목이 존재합니다.");
     } else {
       axios
-        .put("http://localhost:8080/reply/"+value ,comData)
+        .put("http://localhost:8080/reply/" + value, comData)
         .then((response) => {
           resetReply();
           setReply(0);
@@ -192,7 +193,7 @@ const Comment = (props) => {
                 </div>
                 <div className="comment-box">
                   <div className="comment-delete">
-                    <div className="comment-delete__text">{item.comments}</div>
+                    <div>{item.comments}</div>
                   </div>
                   <div className="comment-delete__button">
                     <h2 onClick={() => showPasswordInput(item.uniqueid)}>X</h2>
@@ -247,6 +248,7 @@ const Comment = (props) => {
                     </div>
                   </div>
                 )}
+                <Reply id={item.uniqueid}/>
               </div>
             );
           })}
