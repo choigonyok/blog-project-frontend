@@ -11,6 +11,14 @@ const Comment = (props) => {
   const [comInfo, setComInfo] = useState([]);
   const [passwordComment, setPasswordComment] = useState(0);
   const [deletePW, setDeletePW] = useState("");
+  const [reply, setReply] = useState(0);
+
+  const resetReply = () => {
+    setNowComment("");
+    setNowID("");
+    setNowPW("");
+    setIsFinished(!isFinished);
+  };
 
   useEffect(() => {
     setComData({
@@ -55,13 +63,7 @@ const Comment = (props) => {
       axios
         .put("http://localhost:8080/comments", comData)
         .then((response) => {
-          console.log(comData);
-          console.log(comData);
-          console.log(comData);
-          setNowComment("");
-          setNowID("");
-          setNowPW("");
-          setIsFinished(!isFinished);
+          resetReply();
         })
         .catch((error) => {
           if (error.response.status === 500) {
@@ -90,18 +92,30 @@ const Comment = (props) => {
   }, [isFinished]);
 
   const showPasswordInput = (value) => {
-    setPasswordComment(value);
+    if (passwordComment === value) {
+      setReply(0);
+      setPasswordComment(0);
+      resetReply();
+    } else {
+      setPasswordComment(value);
+      resetReply();
+    }
   };
 
   const CheckPasswordHandler = (value) => {
     axios
-      .post("http://localhost:8080/post/comments?comid="+value.uniqueid+"&inputpw="+deletePW)
-      .then((response)=>{
+      .post(
+        "http://localhost:8080/post/comments?comid=" +
+          value.uniqueid +
+          "&inputpw=" +
+          deletePW
+      )
+      .then((response) => {
         alert("댓글이 삭제되었습니다.");
         setPasswordComment(0);
         setIsFinished(!isFinished);
       })
-      .catch((error)=>{
+      .catch((error) => {
         if (error.response.status === 400) {
           console.log(error);
           alert("PASSWORD가 틀렸습니다.");
@@ -109,7 +123,7 @@ const Comment = (props) => {
           console.log(error);
           alert(error);
         }
-      })                  
+      });
   };
 
   const DeletePasswordHandler = (e) => {
@@ -118,69 +132,134 @@ const Comment = (props) => {
     } else {
       alert("PASSWORD 최대 길이 제한은 8자입니다!");
     }
-  }
+  };
+
+  const ReplyHandler = (value) => {
+    resetReply();
+    if (reply === value.uniqueid && passwordComment === 0) {
+      setReply(0);
+    } else {
+      setPasswordComment(0);
+      setReply(value.uniqueid);
+    }
+
+    console.log(
+      "postid: props.id,comments: nowComment,comid: nowID,compw: nowPW,"
+    );
+  };
+
   
 
   return (
     <div>
       <div className="comment-container">
         {comInfo &&
-          comInfo.map((item, index) => (
-            <div>
-              <div
-                className={
-                  item.isadmin === 1
-                    ? "comment-box__adminwriter"
-                    : "comment-box__writer"
-                }
-              >
-                {item.comid}
-              </div>
-              <div className="comment-box">
-                <div className="comment-delete">{item.comments}</div>
-                <div className="comment-delete__button">
-                  <h4 onClick={() => showPasswordInput(item.uniqueid)}>X</h4>
+          comInfo.map((item, index) => {
+            return (
+              <div>
+                <div
+                  className={
+                    item.isadmin === 1
+                      ? "comment-box__adminwriter"
+                      : "comment-box__writer"
+                  }
+                  onClick={() => ReplyHandler(item)}
+                >
+                  {item.comid}
                 </div>
+                <div className="comment-box">
+                  <div className="comment-delete">
+                    <div className="comment-delete__text">{item.comments}</div>
+                  </div>
+                  <div className="comment-delete__button">
+                    <h2 onClick={() => showPasswordInput(item.uniqueid)}>X</h2>
+                  </div>
+                </div>
+                {passwordComment === item.uniqueid ? (
+                  <div className="password-container">
+                    <input
+                      type="password"
+                      placeholder="PASSWORD"
+                      className="password-text"
+                      onChange={DeletePasswordHandler}
+                    />
+                    <input
+                      type="button"
+                      value="DELETE"
+                      className="comment-button__submit"
+                      onClick={() => CheckPasswordHandler(item)}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                {reply === item.uniqueid && passwordComment === 0 && (
+                  <div className="reply-container__write">
+                    <textarea
+                      className="comment"
+                      placeholder={"REPLY TO " + item.comid}
+                      onChange={commentHandler}
+                      value={nowComment}
+                    />
+                    <div className="comment-buttons">
+                      <input
+                        type="text"
+                        placeholder="NICKNAME"
+                        onChange={commentIDHandler}
+                        value={nowID}
+                      />
+                      <input
+                        type="password"
+                        placeholder="PASSWORD"
+                        onChange={commentPWHandler}
+                        value={nowPW}
+                      />
+                      <input
+                        type="button"
+                        className="comment-button__submit"
+                        value="POST"
+                        
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
-              {passwordComment === item.uniqueid ? 
-              <div className="password-container">
-                <input type="password" placeholder="PASSWORD" className="password-text" onChange={DeletePasswordHandler}/>
-                <input type="button" value="DELETE" className="comment-button__submit" onClick={()=>CheckPasswordHandler(item)}/>
-              </div>
-               : ""}
-            </div>
-          ))}
+            );
+          })}
       </div>
-      <div className="comment-container__container">
-        <div className="comment-container__write">
-          <textarea
-            className="comment"
-            placeholder="PLEASE LEAVE A COMMENT ! (MAX 500 LETTERS)"
-            onChange={commentHandler}
-            value={nowComment}
-          />
-          <div className="comment-buttons">
-            <input
-              type="text"
-              placeholder="NICKNAME"
-              onChange={commentIDHandler}
-              value={nowID}
+      {reply === 0 && (
+        <div className="comment-container__container">
+          <div className="comment-container__write">
+            <textarea
+              className="comment"
+              placeholder="PLEASE LEAVE A COMMENT !"
+              onChange={commentHandler}
+              value={nowComment}
             />
-            <input
-              type="password"
-              placeholder="PASSWORD"
-              onChange={commentPWHandler}
-              value={nowPW}
-            />
-            <input
-              type="button"
-              className="comment-button__submit"
-              value="POST"
-              onClick={commentSendHandler}
-            />
+            <div className="comment-buttons">
+              <input
+                type="text"
+                placeholder="NICKNAME"
+                onChange={commentIDHandler}
+                value={nowID}
+              />
+              <input
+                type="password"
+                placeholder="PASSWORD"
+                onChange={commentPWHandler}
+                value={nowPW}
+              />
+              <input
+                type="button"
+                className="comment-button__submit"
+                value="POST"
+                onClick={commentSendHandler}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
