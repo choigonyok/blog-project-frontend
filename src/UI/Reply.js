@@ -16,7 +16,7 @@ const Reply = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [props.rerender]);
 
   return (
     <div className="reply-box">

@@ -90,7 +90,7 @@ const Comment = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [props.id]);
+  }, [props.id, isFinished]);
 
   const showPasswordInput = (value) => {
     if (passwordComment === value) {
@@ -247,7 +247,7 @@ const Comment = (props) => {
                     </div>
                   </div>
                 )}
-                <Reply id={item.uniqueid}/>
+                <Reply id={item.uniqueid} rerender={isFinished}/>
               </div>
             );
           })}
