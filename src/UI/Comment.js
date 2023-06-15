@@ -87,11 +87,10 @@ const Comment = (props) => {
       .then((response) => {
         setComInfo([...response.data]);
       })
-
       .catch((error) => {
         console.log(error);
       });
-  }, [isFinished]);
+  }, [props.id]);
 
   const showPasswordInput = (value) => {
     if (passwordComment === value) {
