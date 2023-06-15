@@ -34,6 +34,12 @@ h3 {
 }
 h4 {
   font-weight: 400;
+  font-size: 1.2vw;
+  
+}
+h5 {
+  font-weight: 400;
+  font-size: 0.9vw;
 }
 button {
   font-weight: 800;

@@ -41,7 +41,7 @@ const Homepage = () => {
   }, [changeEvent]);
 
   return (
-    <div>
+    <div className="page">
       <Header /> {/* 6/2 Header 컴포넌트 재사용 위해서 분리 */}
       <div className="introduce">
         <div className="visitnum">
