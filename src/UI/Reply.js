@@ -5,6 +5,22 @@ import "./Reply.css";
 
 const Reply = (props) => {
   const [replyList, setReplyList] = useState([]);
+  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
+  const [replyID, setReplyID] = useState(0);
+  const [deletePW, setDeletePW] = useState("");
+  const [isFinished, setIsFinished] = useState(false);
+
+  const showPasswordInput = (value) => {
+    if (isDeleteClicked === false) {
+      setReplyID(value);
+      setIsDeleteClicked(true);
+    } else if (isDeleteClicked === true && value !== replyID) {
+      setReplyID(value);
+    } else {
+      setReplyID(0);
+      setIsDeleteClicked(false);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -16,7 +32,38 @@ const Reply = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [props.rerender]);
+  }, [props.rerender, isFinished]);
+
+  const CheckPasswordHandler = (value) => {
+    axios
+      .post(
+        "http://localhost:8080/reply?replyid=" +
+          value.replyuniqueid +
+          "&inputpw=" +
+          deletePW
+      )
+      .then((response) => {
+        alert("댓글이 삭제되었습니다.");
+        setIsFinished(!isFinished);
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          console.log(error);
+          alert("PASSWORD가 틀렸습니다.");
+        } else {
+          console.log(error);
+          alert(error);
+        }
+      });
+  };
+
+  const DeletePasswordHandler = (e) => {
+    if (e.target.value.length <= 8) {
+      setDeletePW(e.target.value);
+    } else {
+      alert("PASSWORD 최대 길이 제한은 8자입니다!");
+    }
+  };
 
   return (
     <div className="reply-box">
@@ -39,28 +86,29 @@ const Reply = (props) => {
                   <div>{item.comments}</div>
                 </div>
                 <div className="comment-delete__button">
-                  {/* <h2 onClick={() => showPasswordInput(item.replyuniqueid)}>X</h2> */}
-                  <h2>X</h2>
+                  <h2 onClick={() => showPasswordInput(item.replyuniqueid)}>
+                    X
+                  </h2>
                 </div>
               </div>
-              {/* {passwordComment === item.replyuniqueid ? (
-                <div className="password-container">
+              {replyID === item.replyuniqueid ? (
+                <div className="password-container__reply">
                   <input
                     type="password"
                     placeholder="PASSWORD"
                     className="password-text"
-                    //onChange={DeletePasswordHandler}
+                    onChange={DeletePasswordHandler}
                   />
                   <input
                     type="button"
                     value="DELETE"
                     className="comment-button__submit"
-                    //onClick={() => CheckPasswordHandler(item)}
+                    onClick={() => CheckPasswordHandler(item)}
                   />
                 </div>
               ) : (
                 ""
-              )} */}
+              )}
 
               {/* {reply === item.uniqueid && passwordComment === 0 && (
                 <div className="reply-container__write">

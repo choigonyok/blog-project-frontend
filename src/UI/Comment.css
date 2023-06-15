@@ -147,10 +147,12 @@
   width:auto !important;
   word-break: break-all;
   height: auto;
+  justify-content: space-between;
   justify-content: left;
   text-align: left;
   color: rgb(185, 185, 185);
   padding-right: 1%;
+  
 }
 
 .comment-delete__button {
@@ -158,7 +160,6 @@
   font-size: 16px;
   width: 2rem;
   height: 2rem;
-  justify-content: center;
   align-items: center;
   color: transparent;
   transition: 300ms;

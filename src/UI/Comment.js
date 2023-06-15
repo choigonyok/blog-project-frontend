@@ -55,13 +55,6 @@ const Comment = (props) => {
     }
   };
   const commentSendHandler = () => {
-    if (
-      comData.comid === "" ||
-      comData.comments === "" ||
-      comData.compw === ""
-    ) {
-      alert("작성되지 않은 항목이 존재합니다.");
-    } else {
       axios
         .put("http://localhost:8080/comments", comData)
         .then((response) => {
@@ -70,14 +63,17 @@ const Comment = (props) => {
         .catch((error) => {
           if (error.response.status === 500) {
             console.log(error);
-            alert("서버에 문제가 생겨 현재 댓글을 작성할 수 없습니다.");
+            alert("서버에 문제가 생겨 현재 답글을 작성할 수 없습니다.");
           } else if (error.response.status === 400) {
             alert("특수문자 ' 은 입력하실 수 없습니다.");
+          } else if (error.response.status === 406){
+            alert("PASSWORD는 1~8자리의 숫자만 입력 가능합니다.")
+          } else if (error.response.status === 411){
+            alert("빈 칸이 존재합니다.")
           } else {
             console.log(error);
           }
         });
-    }
   };
 
   // post id로 해당 post의 comments get
@@ -147,13 +143,13 @@ const Comment = (props) => {
 
   const replySendHandler = (value) => {
     // item.uniqueid으로 대댓글 만들기
-    if (
-      comData.comid === "" ||
-      comData.comments === "" ||
-      comData.compw === ""
-    ) {
-      alert("작성되지 않은 항목이 존재합니다.");
-    } else {
+    // if (
+    //   comData.comid === "" ||
+    //   comData.comments === "" ||
+    //   comData.compw === ""
+    // ) {
+    //   alert("작성되지 않은 항목이 존재합니다.");
+    // } else {
       axios
         .put("http://localhost:8080/reply/" + value, comData)
         .then((response) => {
@@ -163,14 +159,18 @@ const Comment = (props) => {
         .catch((error) => {
           if (error.response.status === 500) {
             console.log(error);
-            alert("서버에 문제가 생겨 현재 대댓글을 작성할 수 없습니다.");
+            alert("서버에 문제가 생겨 현재 답글을 작성할 수 없습니다.");
           } else if (error.response.status === 400) {
             alert("특수문자 ' 은 입력하실 수 없습니다.");
+          } else if (error.response.status === 406){
+            alert("PASSWORD는 1~8자리의 숫자만 입력 가능합니다.")
+          } else if (error.response.status === 411){
+            alert("빈 칸이 존재합니다.")
           } else {
             console.log(error);
           }
         });
-    }
+    // }
   };
 
   return (
