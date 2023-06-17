@@ -33,7 +33,7 @@ const Deletepage = () => {
       body: bodyText,
     };
     axios
-      .post("http://api.choigonyok.com:8080/api/mod/" + id, postdata, {
+      .post("http://choigonyok.com/api/mod/" + id, postdata, {
         withCredentials: true,
       })
       .then((response) => {
@@ -55,7 +55,7 @@ const Deletepage = () => {
 
   useEffect(() => {
     axios
-      .get("http://api.choigonyok.com:8080/api/post/all")
+      .get("http://choigonyok.com/api/post/all")
       .then((response) => {
         setAllPost(response.data);
       })
@@ -74,7 +74,7 @@ const Deletepage = () => {
 
   const deleteHandler = (value) => {
     axios
-      .delete("http://api.choigonyok.com:8080/api/post/delete" + value, {
+      .delete("http://choigonyok.com/api/post/delete" + value, {
         withCredentials: true,
       })
       .then((response) => {
@@ -89,7 +89,7 @@ const Deletepage = () => {
 
   const modifyHandler = (value) => {
     axios
-      .get("http://api.choigonyok.com:8080/api/post/" + value)
+      .get("http://choigonyok.com/api/post/" + value)
       .then((response) => {
         setToModify(true);
         setID(value);
@@ -124,7 +124,7 @@ const Deletepage = () => {
 
   const CommentDeleteHandler = (value) => {
     axios
-      .delete("http://api.choigonyok.com:8080/api/post/comments/" + value)
+      .delete("http://choigonyok.com/api/post/comments/" + value)
       .then((response) => {
         setPostRequest(!postRequest);
       })
@@ -145,7 +145,7 @@ const Deletepage = () => {
 
   useEffect(() => {
     axios
-      .get("http://api.choigonyok.com:8080/api/post/comments/0")
+      .get("http://choigonyok.com/api/post/comments/0")
       .then((response) => {
         setComInfo([...response.data]);
       })
