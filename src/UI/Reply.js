@@ -24,7 +24,7 @@ const Reply = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/reply/" + props.id)
+      .get("http://api.choigonyok.com:8080/api/reply/" + props.id)
       .then((response) => {
         //   console.log(response.data);
         setReplyList([...response.data]);
@@ -37,7 +37,7 @@ const Reply = (props) => {
   const CheckPasswordHandler = (value) => {
     axios
       .post(
-        "http://localhost:8080/reply?replyid=" +
+        "http://api.choigonyok.com:8080/api/reply?replyid=" +
           value.replyuniqueid +
           "&inputpw=" +
           deletePW

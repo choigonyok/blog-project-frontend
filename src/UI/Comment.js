@@ -56,7 +56,7 @@ const Comment = (props) => {
   };
   const commentSendHandler = () => {
       axios
-        .put("http://localhost:8080/comments", comData)
+        .put("http://api.choigonyok.com:8080/api/comments", comData)
         .then((response) => {
           resetReply();
         })
@@ -79,7 +79,7 @@ const Comment = (props) => {
   // post id로 해당 post의 comments get
   useEffect(() => {
     axios
-      .get("http://localhost:8080/post/comments/" + props.id)
+      .get("http://api.choigonyok.com:8080/api/post/comments/" + props.id)
       .then((response) => {
         setComInfo([...response.data]);
       })
@@ -102,7 +102,7 @@ const Comment = (props) => {
   const CheckPasswordHandler = (value) => {
     axios
       .post(
-        "http://localhost:8080/post/comments?comid=" +
+      "http://api.choigonyok.com:8080/api/post/comments?comid=" +
           value.uniqueid +
           "&inputpw=" +
           deletePW
@@ -151,7 +151,7 @@ const Comment = (props) => {
     //   alert("작성되지 않은 항목이 존재합니다.");
     // } else {
       axios
-        .put("http://localhost:8080/reply/" + value, comData)
+        .put("http://api.choigonyok.com:8080/api/reply/" + value, comData)
         .then((response) => {
           resetReply();
           setReply(0);

@@ -22,7 +22,7 @@ const Postpage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/cookie")
+      .get("http://api.choigonyok.com:8080/api/cookie")
       .then((response) => {})
       .catch((error) => {
         console.log(error);
@@ -35,7 +35,7 @@ const Postpage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/post/" + JSON.stringify(postid))
+      .get("http://api.choigonyok.com:8080/api/post/" + JSON.stringify(postid))
       .then((response) => {
         setPostData(response.data); 
         setChangeEvent(!changeEvent);
@@ -50,7 +50,7 @@ const Postpage = () => {
       mounted.current = true;
     } else {
       axios
-        .post("http://localhost:8080/tag", postData)
+        .post("http://api.choigonyok.com:8080/api/tag", postData)
         .then((response) => {
           const jsonArray = Object.values(response.data);
           setRelatedPostData(

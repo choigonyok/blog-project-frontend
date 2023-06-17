@@ -14,7 +14,7 @@ const Homepage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/cookie")
+      .get("http://api.choigonyok.com:8080/api/cookie")
       .then((response) => {
         console.log(response.data.VisitNumber);
         console.log(response.data.TotalNumber);
