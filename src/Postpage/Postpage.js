@@ -72,7 +72,7 @@ const Postpage = () => {
       <br />
       <div>
         <div className="image-container">
-          <img className="image" alt="my" src={postData.ImagePath} crossorigin/>
+          <img className="image" alt="my" src={"http://choigonyok.com/api/IMAGES/"+postData.ImagePath}/>
         </div>
         <div className="post-title">
           <div className="post-tagsbox">

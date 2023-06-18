@@ -20,8 +20,7 @@ const Card = (props) => {
                   <img
                     className="postcard-image"
                     alt="my"
-                    src={item.ImagePath}
-                    crossorigin
+                    src={"http://choigonyok.com/api/IMAGES/"+item.ImagePath}
                   />
                 </div>
                 <div className="postcard-text">
