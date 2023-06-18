@@ -807,8 +807,7 @@ delete pw를 url로 보낼 수 없어서
 그럼 api를 하나 더 만들어야함
 
 
-깃 remote 재설정 후 push 잘되는지 확인을 위한 수정
+깃 remote 재설정 후 push 잘되는지 확인을 위한 수정 d
 
 
-
-AWS EC2 UBUNTU 에서 깃 기본 유저네임,유저이메일 설정 후 확인을 위한 푸시
+GIT PULL TEST
