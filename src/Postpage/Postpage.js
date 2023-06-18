@@ -72,7 +72,7 @@ const Postpage = () => {
       <br />
       <div>
         <div className="image-container">
-          <iframe className="image" alt="my" src={postData.ImagePath} />
+          <img className="image" alt="my" src={postData.ImagePath} crossorigin/>
         </div>
         <div className="post-title">
           <div className="post-tagsbox">

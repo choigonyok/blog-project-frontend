@@ -17,9 +17,11 @@ const Card = (props) => {
             <div>
               <h2 className="postcard" onClick={()=>{cardClickHandler(item.Id)}}>
                 <div>
-                  <iframe
+                  <img
                     className="postcard-image"
+                    alt="my"
                     src={item.ImagePath}
+                    crossorigin
                   />
                 </div>
                 <div className="postcard-text">
