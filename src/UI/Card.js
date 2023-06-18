@@ -17,9 +17,8 @@ const Card = (props) => {
             <div>
               <h2 className="postcard" onClick={()=>{cardClickHandler(item.Id)}}>
                 <div>
-                  <img
+                  <iframe
                     className="postcard-image"
-                    alt="my"
                     src={item.ImagePath}
                   />
                 </div>
