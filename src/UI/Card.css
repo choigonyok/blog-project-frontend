@@ -45,16 +45,16 @@
 
 .postcard-text {
   font-size: 1.4vw;
-  padding-left: 3%;
-  padding-right: 3%;
-  padding-top: 4%;
+  padding-left: 3% !important;
+  padding-right: 3% !important;
+  padding-top: 4% !important;
   padding-bottom: auto;
   display: flex;
   height: 5vw;
   min-height: 55px;
   width: auto;
   justify-content: left;
-  align-items: center;
+  align-items: flex-start;
 }
 
 @media (width <= 553px) {
