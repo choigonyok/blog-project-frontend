@@ -54,7 +54,7 @@
   min-height: 55px;
   width: auto;
   justify-content: left;
-  align-items: flex-start;
+  align-items: center;
 }
 
 @media (width <= 553px) {

@@ -10,4 +10,4 @@
 * BE : Go, Gin
 * FE : React.js
 * DB : MySQL
-* Version Management : Git / Github
+* Version Management : Git / Githubi
