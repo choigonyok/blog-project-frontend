@@ -1,5 +1,3 @@
-<br>
-
 # BLOG PROJECT
 
 ## **프로젝트명 : 리액트로 바위치기**
@@ -16,17 +14,17 @@
 
 ## **1-1 개발기간**
 
-> 23.06.01 ~ 23.06.20 (20일)
+        23.06.01 ~ 23.06.20 (20일)
 
 ## **1-2 역할**
 
-> 최윤석 (경희대 컴퓨터공학과)
+        최윤석 (경희대 컴퓨터공학과)
 
-* [instagram](www.instagram.com/choigonyok) 
-  
-* [blog](www.choigonyok.com)
+* #### [instagram](https://www.instagram.com/choigonyok)
 
-        설계, BE, FE, 배포 담당
+* #### [blog](www.choigonyok.com)
+
+> 설계, BE, FE, 배포 담당
 
 ## **1-3 결과물**
 
@@ -35,8 +33,6 @@
 <br>
 
 # **개발이유**
-
-<br>
 
 ## **쉬워서**
    
