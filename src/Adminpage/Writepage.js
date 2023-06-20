@@ -3,7 +3,7 @@ import MDEditor, { code } from "@uiw/react-md-editor";
 import "./Writepage.css";
 import Footer from "../UI/Footer";
 import { useEffect, useState } from "react";
-import axios, { HttpStatusCode } from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
@@ -29,7 +29,7 @@ const Writepage = () => {
       body: bodyText,
     };
     axios
-      .post("http://choigonyok.com/api/post/post", postdata, {
+      .post("https://choigonyok.com/api/post/post", postdata, {
         withCredentials: true,
       })
       .then((response) => {
@@ -49,7 +49,7 @@ const Writepage = () => {
 
   const deleteWronglyWrittenPost = () => {
     axios
-      .delete("http://choigonyok.com/api/post/delete0", {
+      .delete("https://choigonyok.com/api/post/delete0", {
         withCredentials: true,
       })
       .catch((error) => {
@@ -103,7 +103,7 @@ const Writepage = () => {
         formData.append("file", img[i]);
       }
       axios
-        .post("http://choigonyok.com/api/post/img", formData, {
+        .post("https://choigonyok.com/api/post/img", formData, {
           "Content-type": "multipart/form-data",
           withCredentials: true,
         })
