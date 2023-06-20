@@ -153,9 +153,9 @@
   word-spacing: 1px !important;
   line-height: 215% !important;
   font-size: 25px !important;
+  word-wrap: break-word !important;
   width: inherit;
   font-weight: 800 !important;
-  white-space:  normal !important;
   background-color: rgba(255, 61, 22, 0.616);
   border-radius: 8px !important;
   font-family: "LeferiPoint-BlackObliqueA" !important;
