@@ -155,7 +155,7 @@
   font-size: 25px !important;
   width: inherit;
   font-weight: 800 !important;
-  white-space: pre-line !important;
+  white-space:  normal !important;
   background-color: rgba(255, 61, 22, 0.616);
   border-radius: 8px !important;
   font-family: "LeferiPoint-BlackObliqueA" !important;
