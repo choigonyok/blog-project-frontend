@@ -22,7 +22,7 @@
 
 * #### [instagram](https://www.instagram.com/choigonyok)
 
-* #### [blog](www.choigonyok.com)
+* #### [blog](https://www.choigonyok.com)
 
 > 설계, BE, FE, 배포 담당
 
