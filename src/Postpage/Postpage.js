@@ -22,7 +22,7 @@ const Postpage = () => {
 
   useEffect(() => {
     axios
-      .get("http://choigonyok.com/api/cookie")
+      .get("https://choigonyok.com/api/cookie")
       .then((response) => {})
       .catch((error) => {
         console.log(error);
@@ -35,7 +35,7 @@ const Postpage = () => {
 
   useEffect(() => {
     axios
-      .get("http://choigonyok.com/api/post/" + JSON.stringify(postid))
+      .get("https://choigonyok.com/api/post/" + JSON.stringify(postid))
       .then((response) => {
         setPostData(response.data); 
         setChangeEvent(!changeEvent);
@@ -50,7 +50,7 @@ const Postpage = () => {
       mounted.current = true;
     } else {
       axios
-        .post("http://choigonyok.com/api/tag", postData)
+        .post("https://choigonyok.com/api/tag", postData)
         .then((response) => {
           const jsonArray = Object.values(response.data);
           setRelatedPostData(
@@ -72,7 +72,7 @@ const Postpage = () => {
       <br />
       <div>
         <div className="image-container">
-          <img className="image" alt="my" src={"http://choigonyok.com/api/IMAGES/"+postData.ImagePath}/>
+          <img className="image" alt="my" src={"https://choigonyok.com/api/IMAGES/"+postData.ImagePath}/>
         </div>
         <div className="post-title">
           <div className="post-tagsbox">

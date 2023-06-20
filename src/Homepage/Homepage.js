@@ -14,7 +14,7 @@ const Homepage = () => {
 
   useEffect(() => {
     axios
-      .get("http://choigonyok.com/api/cookie")
+      .get("https://choigonyok.com/api/cookie")
       .then((response) => {
         console.log(response.data.VisitNumber);
         console.log(response.data.TotalNumber);
@@ -51,10 +51,10 @@ const Homepage = () => {
           <img className="home-image" alt="my" src={profileimage} />
         </div>
         <div className="icon-container">
-          <a href="https://github.com/choigonyok">
+          <a href="httpss://github.com/choigonyok">
             <img className="icon-image" alt="my" src={github} />
           </a>
-          <a href="https://www.instagram.com/choigonyok">
+          <a href="httpss://www.instagram.com/choigonyok">
             <img className="icon-image" alt="my" src={instagram} />
           </a>
         </div>
