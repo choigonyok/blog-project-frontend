@@ -51,10 +51,10 @@ const Homepage = () => {
           <img className="home-image" alt="my" src={profileimage} />
         </div>
         <div className="icon-container">
-          <a href="httpss://github.com/choigonyok">
+          <a href="https://github.com/choigonyok">
             <img className="icon-image" alt="my" src={github} />
           </a>
-          <a href="httpss://www.instagram.com/choigonyok">
+          <a href="https://www.instagram.com/choigonyok">
             <img className="icon-image" alt="my" src={instagram} />
           </a>
         </div>
