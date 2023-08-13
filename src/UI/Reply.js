@@ -22,9 +22,9 @@ const Reply = (props) => {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     axios
-      .get("https://choigonyok.com/api/reply/" + props.id)
+      .get(process.env.REACT_APP_HOST+ "/api/reply/" + props.id)
       .then((response) => {
         //   console.log(response.data);
         setReplyList([...response.data]);
@@ -37,7 +37,7 @@ const Reply = (props) => {
   const CheckPasswordHandler = (value) => {
     axios
       .post(
-        "https://choigonyok.com/api/reply?replyid=" +
+        process.env.REACT_APP_HOST+ "/api/reply?replyid=" +
           value.replyuniqueid +
           "&inputpw=" +
           deletePW

@@ -13,7 +13,7 @@ const Button = (props) => {
   useEffect(() => {
     // POST 요청 보내기
     axios
-      .post("https://choigonyok.com/api/tag", PostData)
+      .post(process.env.REACT_APP_HOST+ "/api/tag", PostData)
       .then((response) => {
         // 응답 데이터 수신
         const jsonArray = Object.values(response.data);
@@ -26,7 +26,7 @@ const Button = (props) => {
 
   useEffect(() => {
     axios
-     .get("https://choigonyok.com/api/tag")
+     .get(process.env.REACT_APP_HOST+ "/api/tag")
       .then((response) => {
         // 응답 데이터 수신
         // console.log(response.data);
